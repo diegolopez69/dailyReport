@@ -1,0 +1,32 @@
+.bg-selected {
+    background-color: rgb(184, 184, 184);
+    right: 16px;
+    bottom: 37px;
+    animation-name: selected;
+    animation-duration: 1.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes selected {
+    0% {
+        background-color: #dbdbdb;
+    }
+    20% {
+        background-color: #dbdbdb;
+    }
+    50% {
+        background-color: #f5f5f5;
+    }
+    75% {
+        background-color: #dbdbdb;
+    }
+    100% {
+        background-color: #dbdbdb;
+    }
+}
+
+.button-right {
+    place-self: center;
+    white-space: pre;
+}

@@ -1,0 +1,59 @@
+{
+  "name": "new-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@devexpress/dx-react-core": "^3.0.2",
+    "@devexpress/dx-react-scheduler": "^3.0.2",
+    "@devexpress/dx-react-scheduler-material-ui": "^3.0.2",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/lab": "^5.0.0-alpha.75",
+    "@mui/material": "^5.5.2",
+    "axios": "^0.26.1",
+    "bootstrap": "^4.3.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.4.0",
+    "moment": "^2.29.1",
+    "node-sass": "^4.14.1",
+    "npm": "^8.5.3",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-bootstrap": "^1.0.0-beta.5",
+    "react-dom": "^16.8.4",
+    "react-export-excel": "^0.5.3",
+    "react-full-screen": "^0.2.4",
+    "react-loadable": "^5.5.0",
+    "react-nvd3": "^0.5.7",
+    "react-perfect-scrollbar": "^1.4.4",
+    "react-redux": "^6.0.1",
+    "react-reveal": "^1.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.0.0",
+    "react-toastify": "^8.2.0",
+    "react-window-size": "^1.2.2",
+    "redux": "^4.0.1",
+    "rsuite": "^5.16.0",
+    "rsuite-table": "^5.6.1",
+    "sweetalert2": "^11.4.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "react-to-print": "^2.1.1"
+  }
+}

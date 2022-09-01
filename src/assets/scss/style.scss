@@ -1,0 +1,63 @@
+/**======================================================================
+=========================================================================
+Template Name: Datta Able Free Admin Template
+Author: Codedthemes
+supports: https://codedthemes.support-hub.io/
+File: style.css
+=========================================================================
+=========================================================================
+  == Table of Contents==
+	- Generic classes
+		-	Margin, Padding, Font class, text align, position, floating, overflow, background class, text color, display class, boarder class
+	- Theme Elements
+		-	Accordion, Button, tabs, typography, buttons, box shadow, Lable & Badges, Alert, Pagination, Breadcumb, Cards, Collapse,
+        -   Carousel, Grid, Progress, Model, tooltip, popover, Datepicker, Gridstack, lightbox, notification, Nestable, pnotify, rating,
+        -   Rangeslider, Slider, Syntax Highlighter, Tour, Treeview, Toolbar, Session Timeout, Session idle Timeout, offline, Animation
+    - Forms
+        -   Forms Elements, Advance Form Control, Validation, Masking, Wizard, Picker, Select
+	- Pages
+		-   Chat, authentication, Maintenance, Maps, Landingpage messages, task, Todo, Notes, Charts, Icons, Gallery, Editors,
+        -   Invoice, Full Calender, File Upload,
+=================================================================================
+=================================================================================== */
+@import '~bootstrap/dist/css/bootstrap';
+
+// General theme contents
+@import 'partials/_modal';
+@import 'partials/_tables';
+@import 'partials/_variables';
+@import 'partials/_general';
+@import 'partials/_generic';
+@import 'partials/mixins/_function';
+
+// important Element
+@import 'partials/menu/_menu-lite';
+@import 'partials/widget/_widget';
+
+// Theme Element
+@import 'partials/theme-elements/_form';
+@import 'partials/theme-elements/_radiobox-checkbox';
+@import 'partials/theme-elements/_labels-badges';
+@import 'partials/theme-elements/_data-tables';
+@import 'partials/theme-elements/_authentication';
+@import 'partials/theme-elements/_button';
+@import 'partials/theme-elements/_alert';
+@import 'partials/theme-elements/_breadcrumb-pagination';
+@import 'partials/theme-elements/_progress';
+@import 'partials/theme-elements/_tooltip';
+@import 'partials/theme-elements/_popover';
+@import 'partials/theme-elements/_nav';
+@import 'partials/_modal';
+@import 'partials/_errors';
+
+// Other
+@import 'partials/other/_chat';
+@import 'partials/other/_prism';
+@import 'partials/other/_switches';
+
+@import 'partials/other/_chart';
+@import 'partials/other/_icon-lauouts';
+
+@import 'partials/third-party/_third-party';
+
+@import '~react-toastify/dist/ReactToastify.css';
