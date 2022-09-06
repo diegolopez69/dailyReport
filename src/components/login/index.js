@@ -35,7 +35,7 @@ const Login = () => {
                                     <input
                                         required
                                         type='text'
-                                        name='user'
+                                        name='username'
                                         className={`form-control btn-pill ${!result && message && 'is-invalid'}`}
                                         placeholder='Usuario'
                                         onChange={handleInputChange}

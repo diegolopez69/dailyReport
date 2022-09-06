@@ -11,24 +11,24 @@ export const useActions = ({ data, setData, apiAccess }) => {
 
         localStorage.clear()
         localStorage.setItem('token', 'kshdfkjhskdjfhkjdsf')
-        localStorage.setItem('user', 'EXMAPLE')
+        localStorage.setItem('user', data.username)
         localStorage.setItem('team', 'EXAMPLE')
         window.location.href = '/example'
 
-        // await postLogin({ apiAccess, data })
-        //     .then(response => {
-        //         if (response) {
-        //             const { nombre, token, redirect, equipo } = response
-        //         }
-        //     })
-        //     .catch(error => {
-        //         if (error) {
-        //             setResponseLogin(error.data)
-        //         } else {
-        //             console.log('API ERROR: ', error)
-        //             setResponseLogin({ status: false, message: 'No hay comunicación con los servicios :(' })
-        //         }
-        //     })
+        await postLogin({ apiAccess, data })
+            .then(response => {
+                if (response) {
+                    const { user, token, redirect, equipo } = response
+                }
+            })
+            .catch(error => {
+                if (error) {
+                    setResponseLogin(error.data)
+                } else {
+                    console.log('API ERROR: ', error)
+                    setResponseLogin({ status: false, message: 'No hay comunicación con los servicios :(' })
+                }
+            })
     }
 
     const showPassword = () => {

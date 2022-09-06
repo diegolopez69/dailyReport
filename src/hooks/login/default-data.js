@@ -1,10 +1,10 @@
 export const defaultData = {
-    user: '',
+    username: '',
     password: '',
     show_password: false,
 }
 
 export const apiAccess = {
-    page_api_path: `${process.env.REACT_APP_BASE_API}/v1/security`,
+    page_api_path: `${process.env.REACT_APP_BASE_API}`,
     token: localStorage.getItem('token'),
 }

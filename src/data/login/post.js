@@ -2,11 +2,14 @@ import axios from 'axios'
 
 export const postLogin = async ({ apiAccess, data }) => {
     const { page_api_path } = apiAccess
-    const { user, password } = data
+    const { username, password } = data
 
+    console.log(page_api_path);
+    console.log(data);
+    
     return await axios
-        .post(`http://localhost:3000/api/auth/signin`, {
-            user,
+        .post(`${page_api_path}/api/auth/signin`, {
+            username,
             password,
         })
         .then(({ data }) => {
