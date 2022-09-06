@@ -8,14 +8,14 @@ export default {
             children: [
                 {
                     id: 'example1',
-                    title: 'Example 1',
+                    title: 'Inventario',
                     type: 'item',
                     url: '/example',
                     icon: 'feather icon-clock',
                 },
                 {
                     id: 'example2',
-                    title: 'Example 2',
+                    title: 'Chromebooks',
                     type: 'item',
                     url: '/example',
                     icon: 'feather icon-clipboard',

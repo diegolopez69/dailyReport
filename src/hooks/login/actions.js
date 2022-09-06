@@ -10,7 +10,7 @@ export const useActions = ({ data, setData, apiAccess }) => {
         setResponseLogin({ result: true, message: 'Ingresando...' })
 
         localStorage.clear()
-        localStorage.setItem('token', 'kshdfkjhskdjfhkjdsf')
+        localStorage.setItem('token', data.accessToken)
         localStorage.setItem('user', data.username)
         localStorage.setItem('team', 'EXAMPLE')
         window.location.href = '/example'
