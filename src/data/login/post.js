@@ -5,7 +5,7 @@ export const postLogin = async ({ apiAccess, data }) => {
     const { user, password } = data
 
     return await axios
-        .post(`${page_api_path}/login`, {
+        .post(`http://localhost:3000/api/auth/signin`, {
             user,
             password,
         })
