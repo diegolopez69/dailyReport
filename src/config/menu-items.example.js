@@ -20,6 +20,13 @@ export default {
                     url: '/example',
                     icon: 'feather icon-clipboard',
                 },
+                {
+                    id: 'example3',
+                    title: 'Pantallas',
+                    type: 'item',
+                    url: '/example',
+                    icon: 'airplay',
+                },
             ],
         },
     ],

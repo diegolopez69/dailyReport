@@ -9,6 +9,7 @@ const Breadcrumb = props => {
     const { items } = menu
     let title = 'Página'
 
+    console.log('sdadasd', menu);
     items.forEach(({ children }) => {
         const findTitle = children.find(item => item.url === props.location.pathname)
         if (findTitle) {
@@ -17,7 +18,7 @@ const Breadcrumb = props => {
         }
     })
 
-    document.title = `${process.env.REACT_APP_APP_NAME} | ` + title
+    document.title = `${process.env.REACT_APP_APP_NAME} | `+ title
 
     return (
         <Aux>
