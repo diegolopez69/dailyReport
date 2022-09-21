@@ -1,0 +1,95 @@
+.modalBackground-edit{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    background-color: rgb(199, 199, 199);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modalContainer-edit{
+    width: 500px;
+    height: 450px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+.modalContainer-edit .bt-close-edit{
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    width: 20px;
+}
+.bt-edit{
+    color: white;
+    margin: 10px;
+    width: 100px;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+    background-color: rgb(154, 204, 105);
+}
+.bt-cancel-edit{
+    margin: 10px;
+    width: 100px;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+    color: black;
+}
+.bt-cancel-edit:hover{
+    background-color:darkgray;
+}
+.bt-edit:hover{
+    background-color: rgb(109, 207, 11);
+}
+.container-row-1{
+    display: flex;
+    align-items: center;
+}
+.container-row-2{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+.container-row-3{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.body-edit input{
+    border: none;
+    text-align: left;
+    margin: 20px 0px 0px 0px;
+    width: 280px;
+}
+.body-edit h4{
+    /* Arriba | Derecha | Abajo | Izquierda */
+    margin: 20px 20px 0px 30px;
+    justify-content: center;
+    font-size: 15px;
+    width: 80px;
+}
+.body-edit hr{
+    text-align: right !important ;
+    margin: 0px;
+    width: 300px;
+    margin-left: 120px;
+}
+.body-edit .hr-select{
+    width: 30%;
+    margin-bottom: 50px;
+}
+.select-edit{
+    margin-top: 15px;
+    margin-bottom: 0px;
+    border: none;
+    color: black;
+}

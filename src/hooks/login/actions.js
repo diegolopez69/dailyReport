@@ -15,7 +15,7 @@ export const useActions = ({ data, setData, apiAccess }) => {
         localStorage.setItem('team', 'EXAMPLE')
         window.location.href = '/example'
 
-        await postLogin({ apiAccess, data })
+        await postLogin({ apiAccess, data }) //llamada api
             .then(response => {
                 if (response) {
                     const { user, token, redirect, equipo } = response

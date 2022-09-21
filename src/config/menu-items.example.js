@@ -45,7 +45,7 @@ export default {
                     id: 'example4',
                     title: 'Usuarios',
                     type: 'item',
-                    url: '/example',
+                    url: '/user',
                     icon: 'airplay',
                 },
             ],
