@@ -12,7 +12,8 @@ const navLogo = props => {
         <Aux>
             <div className='navbar-brand header-logo'>
                 <a href className='b-brand'>
-                    <img className='logo-kronos-nav-logo' src={logoKronos} alt='Logo' />
+                    {/* <img className='logo-kronos-nav-logo' src={logoKronos} alt='Logo' /> */}
+                    <i className='feather icon-bar-chart-2 auth-icon' />
                     <span className='b-title'>{process.env.REACT_APP_APP_NAME}</span>
                 </a>
                 <a href className={toggleClass.join(' ')} id='mobile-collapse' onClick={props.onToggleNavigation}>

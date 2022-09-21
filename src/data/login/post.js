@@ -13,9 +13,12 @@ export const postLogin = async ({ apiAccess, data }) => {
             password,
         })
         .then(({ data }) => {
+            console.log("Entró con éxtio!!!!")
+            window.location.href = '/example'
             return data
         })
         .catch(({ response }) => {
+            console.log("Falló al entrar");
             throw response
         })
 }

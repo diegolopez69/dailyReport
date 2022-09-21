@@ -29,7 +29,8 @@ const NavBar = props => {
                         {/* <div className='b-bg'>
                             <i className='feather icon-clock' />
                         </div> */}
-                        <img className='logo-kronos' src={logoKronos} alt='Logo' />
+                        {/* <img className='logo-kronos' src={logoKronos} alt='Logo' /> */}
+                        <i className='feather icon-bar-chart-2 auth-icon' />
                         <span className='b-title'>{process.env.REACT_APP_APP_NAME}</span>
                     </a>
                 </div>

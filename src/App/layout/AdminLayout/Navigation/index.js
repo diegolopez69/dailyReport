@@ -13,7 +13,7 @@ import menu from '../../../../config/menu-items.example'
 
 const Navigation = props => {
     // const { menu } = useFetchNavigation()
-    console.log('ESTO ', menu)
+    
     const navigation = menu
 
     let navClass = ['pcoded-navbar']
