@@ -3,12 +3,12 @@ import { Row, Col, Tabs, Tab, Nav } from 'react-bootstrap'
 
 import Aux from '../../hooks/_Aux'
 
-const Example = props => {
+const Book_Classroom = props => {
     return (
         <Aux>
             <Row>
                 <Col>
-                    <h5>Basic Tabs</h5>
+                    <h5> Book classroom basic Tabs</h5>
                     <hr />
                     <Tabs defaultActiveKey='home'>
                         <Tab eventKey='home' title='HOME'>
@@ -37,7 +37,7 @@ const Example = props => {
                         </Tab>
                     </Tabs>
 
-                    <h5 className='mt-4'>Basic Pills</h5>
+                    <h5 className='mt-4'>Book classroom Basic Pills</h5>
                     <hr />
                     <Tabs variant='pills' defaultActiveKey='home' className='mb-3'>
                         <Tab eventKey='home' title='HOME'>
@@ -66,7 +66,7 @@ const Example = props => {
                         </Tab>
                     </Tabs>
 
-                    <h5 className='mt-4'>Vertical Pills</h5>
+                    <h5 className='mt-4'>Book Classroom Vertical Pills</h5>
                     <hr />
                     <Tab.Container defaultActiveKey='home'>
                         <Row>
@@ -129,4 +129,4 @@ const Example = props => {
     )
 }
 
-export default Example
+export default Book_Classroom

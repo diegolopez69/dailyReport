@@ -8,7 +8,7 @@ const Check = props => {
         <Aux>
             <Row>
                 <Col>
-                    <h5>Basic Tabs</h5>
+                    <h5>Check Basic Tabs</h5>
                     <hr />
                     <Tabs defaultActiveKey='home'>
                         <Tab eventKey='home' title='HOME'>
@@ -37,7 +37,7 @@ const Check = props => {
                         </Tab>
                     </Tabs>
 
-                    <h5 className='mt-4'>Basic Pills</h5>
+                    <h5 className='mt-4'>Check Basic Pills</h5>
                     <hr />
                     <Tabs variant='pills' defaultActiveKey='home' className='mb-3'>
                         <Tab eventKey='home' title='HOME'>
@@ -66,7 +66,7 @@ const Check = props => {
                         </Tab>
                     </Tabs>
 
-                    <h5 className='mt-4'>Vertical Pills</h5>
+                    <h5 className='mt-4'>Check Vertical Pills</h5>
                     <hr />
                     <Tab.Container defaultActiveKey='home'>
                         <Row>
