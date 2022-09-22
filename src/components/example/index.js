@@ -3,7 +3,7 @@ import { Row, Col, Tabs, Tab, Nav } from 'react-bootstrap'
 
 import Aux from '../../hooks/_Aux'
 
-const Eample = props => {
+const Example = props => {
     return (
         <Aux>
             <Row>
@@ -44,4 +44,4 @@ const Eample = props => {
     )
 }
 
-export default Eample
+export default Example
