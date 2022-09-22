@@ -8,14 +8,11 @@ export const useActions = ({ data, setData, apiAccess }) => {
     const tryLogin = async e => {
         e.preventDefault()
         setResponseLogin({ result: true, message: 'Ingresando...' })
-
         localStorage.clear()
-        console.log(data);
         //window.location.href = '/example'
         
         await postLogin({ apiAccess, data })
         .then(response => {
-            console.log("response", response)
             if (response) {
                 const { user, token, redirect, equipo } = response
                     localStorage.setItem('user', data.username)
@@ -23,9 +20,6 @@ export const useActions = ({ data, setData, apiAccess }) => {
                     localStorage.setItem('token', response.accessToken)
                     //window.location.href = '/example'
                     //const { user, token } = response
-                }else{
-                    console.log("dnsajkdnsajkd")
-                    window.location.href = '/signup'
                 }
             })
             .catch(error => {
