@@ -6,5 +6,5 @@ export const defaultData = {
 
 export const apiAccess = {
     page_api_path: `${process.env.REACT_APP_BASE_API}`,
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('user'),
 }

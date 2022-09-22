@@ -4,7 +4,7 @@ import './../../assets/scss/style.scss'
 import Aux from '../../hooks/_Aux'
 import background from '../../assets/images/background.jpg'
 import { useFetchInitLogin } from '../../hooks/login'
-import logoKronos from '../../assets/images/logo_kronos.svg'
+
 
 const Login = () => {
     const FetchInitLogin = useFetchInitLogin()
@@ -27,19 +27,16 @@ const Login = () => {
                         <div className='card '>
                             <div className='card-body text-center'>
                                 <div className='mb-3'>
-                                <i className='feather icon-bar-chart-2 auth-icon' />
-                                    {/* <img className='logo-kronos' src={logoKronos} alt='Logo' /> */}
+                                    <i className='feather icon-bar-chart-2 auth-icon' />
                                 </div>
                                 <h4 className='mb-4 text-muted strong'>{process.env.REACT_APP_APP_NAME}</h4>
-
-                                
                                 <div className='input-group mb-3'>
                                     <input
                                         required
                                         type='text'
                                         name='username'
                                         className={`form-control btn-pill ${!result && message && 'is-invalid'}`}
-                                        placeholder='Usuario'
+                                        placeholder='Correo electrónico'
                                         onChange={handleInputChange}
                                     />
                                 </div>
@@ -49,14 +46,22 @@ const Login = () => {
                                         type={show_password ? 'text' : 'password'}
                                         name='password'
                                         className={`form-control btn-pill ${!result && message && 'is-invalid'}`}
-                                        placeholder='Contraseña'
+                                        placeholder='Introducir contraseña'
                                         onChange={handleInputChange}
                                         autocomplete='on'
                                     />
                                 </div>
-
-
-
+                                <div className='input-group mb-3'>
+                                    <input
+                                        required
+                                        type={show_password ? 'text' : 'password'}
+                                        name='password'
+                                        className={`form-control btn-pill ${!result && message && 'is-invalid'}`}
+                                        placeholder='Repetir contraseña'
+                                        onChange={handleInputChange}
+                                        autocomplete='on'
+                                    />
+                                </div>
                                 <div className='mb-3 ml-2 text-center'>
                                     {show_password ? (
                                         <>
@@ -74,14 +79,10 @@ const Login = () => {
                                         </>
                                     )}
                                 </div>
-
-
                                 {message && <p className={`text-${result ? 'success' : 'danger'}`}>{message}</p>}
                                 <button className='col-12 btn btn-primary shadow-1 mb-2 mt-2 btn-md btn-pill'>
-                                    Acceder
+                                    Crear usuario
                                 </button>
-
-                                
                             </div>
                         </div>
                     </div>

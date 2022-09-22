@@ -10,15 +10,22 @@ export const useActions = ({ data, setData, apiAccess }) => {
         setResponseLogin({ result: true, message: 'Ingresando...' })
 
         localStorage.clear()
-        localStorage.setItem('token', data.accessToken)
-        localStorage.setItem('user', data.username)
-        localStorage.setItem('team', 'EXAMPLE')
-        window.location.href = '/example'
-
-        await postLogin({ apiAccess, data }) //llamada api
-            .then(response => {
-                if (response) {
-                    const { user, token, redirect, equipo } = response
+        console.log(data);
+        //window.location.href = '/example'
+        
+        await postLogin({ apiAccess, data })
+        .then(response => {
+            console.log("response", response)
+            if (response) {
+                const { user, token, redirect, equipo } = response
+                    localStorage.setItem('user', data.username)
+                    localStorage.setItem('team', 'EXAMPLE')
+                    localStorage.setItem('token', response.accessToken)
+                    //window.location.href = '/example'
+                    //const { user, token } = response
+                }else{
+                    console.log("dnsajkdnsajkd")
+                    window.location.href = '/signup'
                 }
             })
             .catch(error => {
@@ -26,7 +33,7 @@ export const useActions = ({ data, setData, apiAccess }) => {
                     setResponseLogin(error.data)
                 } else {
                     console.log('API ERROR: ', error)
-                    setResponseLogin({ status: false, message: 'No hay comunicación con los servicios :(' })
+                    setResponseLogin({ status: false, message: 'No hay comunicación con los servicios ' })
                 }
             })
     }

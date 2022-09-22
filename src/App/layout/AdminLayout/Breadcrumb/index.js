@@ -9,7 +9,7 @@ const Breadcrumb = props => {
     const { items } = menu
     let title = 'Página'
 
-    console.log('sdadasd', menu);
+    
     items.forEach(({ children }) => {
         const findTitle = children.find(item => item.url === props.location.pathname)
         if (findTitle) {
