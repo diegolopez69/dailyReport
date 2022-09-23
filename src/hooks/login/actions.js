@@ -9,7 +9,6 @@ export const useActions = ({ data, setData, apiAccess }) => {
         e.preventDefault()
         setResponseLogin({ result: true, message: 'Ingresando...' })
         localStorage.clear()
-        //window.location.href = '/example'
         
         await postLogin({ apiAccess, data })
         .then(response => {
@@ -18,8 +17,7 @@ export const useActions = ({ data, setData, apiAccess }) => {
                     localStorage.setItem('user', data.username)
                     localStorage.setItem('team', 'EXAMPLE')
                     localStorage.setItem('token', response.accessToken)
-                    //window.location.href = '/example'
-                    //const { user, token } = response
+                    window.location.href = '/inventory'
                 }
             })
             .catch(error => {
@@ -27,7 +25,7 @@ export const useActions = ({ data, setData, apiAccess }) => {
                     setResponseLogin(error.data)
                 } else {
                     console.log('API ERROR: ', error)
-                    setResponseLogin({ status: false, message: 'No hay comunicación con los servicios ' })
+                    setResponseLogin({ status: false, message: 'No hay comunicación con los servidores.' })
                 }
             })
     }
