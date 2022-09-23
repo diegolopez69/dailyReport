@@ -7,11 +7,11 @@ export default {
             icon: 'icon-navigation',
             children: [
                 {
-                    id: 'example1',
-                    title: 'Inventario',
+                    id: 'example5',
+                    title: 'Reportes',
                     type: 'item',
-                    url: '/inventory',
-                    icon: 'feather icon-clipboard',
+                    url: '/reports',
+                    icon: 'feather icon-flag',
                 },
                 {
                     id: 'example2',
@@ -35,11 +35,11 @@ export default {
                     icon: 'feather icon-bookmark',
                 },
                 {
-                    id: 'example5',
-                    title: 'Reportes',
+                    id: 'example1',
+                    title: 'Inventario',
                     type: 'item',
-                    url: '/reports',
-                    icon: 'feather icon-flag',
+                    url: '/inventory',
+                    icon: 'feather icon-clipboard',
                 },
                 {
                     id: 'example6',

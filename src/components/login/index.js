@@ -76,6 +76,13 @@ const Login = () => {
                                 </div>
 
 
+                                <div className='mb-3 ml-2 text-center'>
+                                            <spam className='cursor'>
+                                                Registrate
+                                            </spam>
+                                </div>
+
+
                                 {message && <p className={`text-${result ? 'success' : 'danger'}`}>{message}</p>}
                                 <button className='col-12 btn btn-primary shadow-1 mb-2 mt-2 btn-md btn-pill'>
                                     Acceder

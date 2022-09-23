@@ -17,7 +17,7 @@ export const useActions = ({ data, setData, apiAccess }) => {
                     localStorage.setItem('user', data.username)
                     localStorage.setItem('team', 'EXAMPLE')
                     localStorage.setItem('token', response.accessToken)
-                    window.location.href = '/inventory'
+                    window.location.href = '/reports'
                 }
             })
             .catch(error => {
