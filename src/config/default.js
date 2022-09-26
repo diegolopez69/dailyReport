@@ -1,6 +1,6 @@
 export default {
     defaultPath: '/example',
-    homePath: '/example', // CONFIG PATH FOR REDIRECT TO PAGE NOT FOUND
+    homePath: '/login',
     basename: '/', // only at build time to set, like /datta-able
     layout: 'vertical', // vertical
     preLayout: null, // (not available in lite version)

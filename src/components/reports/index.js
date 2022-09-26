@@ -3,12 +3,12 @@ import { Row, Col, Tabs, Tab, Nav } from 'react-bootstrap'
 
 import Aux from '../../hooks/_Aux'
 
-const Inventory = props => {
+const Reports = props => {
     return (
         <Aux>
             <Row>
                 <Col>
-                    <h5>Inventory Basic Tabs</h5>
+                    <h5>Reports Basic Tabs</h5>
                     <hr />
                     <Tabs defaultActiveKey='home'>
                         <Tab eventKey='home' title='HOME'>
@@ -37,7 +37,7 @@ const Inventory = props => {
                         </Tab>
                     </Tabs>
 
-                    <h5 className='mt-4'>Inventory Basic Pills</h5>
+                    <h5 className='mt-4'>Reports Basic Pills</h5>
                     <hr />
                     <Tabs variant='pills' defaultActiveKey='home' className='mb-3'>
                         <Tab eventKey='home' title='HOME'>
@@ -66,7 +66,7 @@ const Inventory = props => {
                         </Tab>
                     </Tabs>
 
-                    <h5 className='mt-4'>Inventory Vertical Pills</h5>
+                    <h5 className='mt-4'>Reports Vertical Pills</h5>
                     <hr />
                     <Tab.Container defaultActiveKey='home'>
                         <Row>
@@ -129,4 +129,4 @@ const Inventory = props => {
     )
 }
 
-export default Inventory
+export default Reports

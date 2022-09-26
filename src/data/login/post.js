@@ -14,7 +14,7 @@ export const postLogin = async ({ apiAccess, data }) => {
         })
         .then(({ data }) => {
             console.log("Entró con éxtio!!!!")
-            window.location.href = '/example'
+            //window.location.href = '/reports'
             return data
         })
         .catch(({ response }) => {
