@@ -5,10 +5,11 @@
     left: 0;
     transition: all .5s;
     background-color: rgb(199, 199, 199);
-    position: fixed;    
+    position:fixed;    
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 .modalContainer-add{
     width: 500px;
@@ -16,7 +17,7 @@
     border-radius: 5px;
     background-color: white;
     box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
-    display: flex;
+    display: flex ;
     flex-direction: column;
     padding: 25px;
 }
@@ -69,10 +70,16 @@
     align-items: center;
 }
 .body-add input{
-    border: none;
+    border-color: transparent;
     text-align: left;
     margin: 20px 0px 0px 0px;
     width: 280px;
+    }
+.body-add input:invalid{
+    color: tomato;
+}
+.body-add input:valid + .icon-check{
+    visibility: visible;
 }
 .body-add h4{
     margin: 20px 20px 0px 30px;
@@ -88,8 +95,22 @@
 }
 .body-add .hr-select-add{
     width: 30%;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .footer-add{
     text-align: center;
+}
+.textResult{
+    text-align: center;
+    width: 450px;
+    height: 30px;
+    margin-top: 10px;
+    color: rgb(148, 219, 40);
+}
+.icon-check{
+    margin-top: 20px;
+    width: 10px;
+    height: 10px;
+    color: greenyellow;
+    visibility: hidden;
 }

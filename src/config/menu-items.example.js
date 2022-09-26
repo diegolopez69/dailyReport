@@ -45,7 +45,7 @@ export default {
                     id: 'example6',
                     title: 'Usuarios',
                     type: 'item',
-                    url: '/example',
+                    url: '/user',
                     icon: 'feather icon-users',
                 },
             ],
