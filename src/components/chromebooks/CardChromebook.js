@@ -2,16 +2,35 @@ import React from "react";
 import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import "../../assets/css/chromebook/card.css"
 
 const CardChromebook =()=>{
     const [number, setNumber] = useState("1");
-    const [description, setDescription] = useState("En repración");
+    const [description, setDescription] = useState("");
     const [armario, setArmario ] = useState("1");
     const [sn, setSn] = useState("CP314-1HN");
     const [stateChrome, setStateChrome] = useState(true);
     const [stateEdit, setStateEdit] = useState(false);
+    const [errorDescription, setErrorDescription] = useState(false)
+    const [descriptionEdited, setDescriptionEdited] = useState(false)
+
+
+    const toEdit = ()=>{
+        if(description.length==0){            
+            setTimeout(() => {
+                setErrorDescription(false) 
+            }, 2000);           
+            setErrorDescription(true)
+        }else{
+            setDescriptionEdited(true)
+            setErrorDescription(false)
+            setStateChrome(false)
+            alert("Editación")            
+        }
+    }
 
 
     return(
@@ -25,8 +44,8 @@ const CardChromebook =()=>{
                 <LaptopChromebookIcon className="icon-laptop" />
             </div>            
         </div>
-        {!stateEdit?
-            <div>
+        {!stateEdit?        
+            <div>                
                 <div className="body">
                     <h4> Chromebook {number} </h4>            
                         <div className="container-state">
@@ -35,11 +54,34 @@ const CardChromebook =()=>{
                                 <input type="checkbox"  checked={stateChrome} onChange={(e)=> setStateChrome(e.target.checked)}/>
                                 <span class="slider round"></span>
                             </label>
-                        </div>                            
+                        </div>
+
+                    { !stateChrome && !descriptionEdited?
+                        <div>
+                            <div className="container-input-description">
+                                <h4 className="text-description" >Descripción:</h4>
+                                <input className={ !errorDescription ? "input-description" : "input-description-error"}  onChange={(e)=>setDescription(e.target.value)}/>
+                            </div> 
+                            <div className="footer-description">
+                                <CloseIcon onClick={()=>setStateChrome(true)} className="icon-cancel-description"/>
+                                <CheckIcon onClick={toEdit} className="icon-check-description"/>
+                            </div>
+                        </div>                        
+                        :
+                        <div className="footer">
+                            {stateChrome? 
+                                <h6>{sn}</h6>:
+                                <>
+                                    <h6 className="descriptionEdited">{description}</h6>
+                                    <h6>{sn}</h6>
+                                </>
+                            }
+                            
+                            
+                        </div>
+                    }                           
                 </div>
-                <div className="footer">
-                    <h6>{sn}</h6>
-                </div>
+                
             </div>
             :
             <div>

@@ -127,7 +127,7 @@ input:checked + .slider:before {
 }
 .input-idChrome{
     border: none;
-    text-align: center;
+    text-align: left;
     border-radius: 5px;
     width: 100px;
     color: black;
@@ -202,4 +202,57 @@ input:checked + .slider:before {
     width: 40px;
     color: black;
     height: 20px;
+}
+.input-description{
+    border: none;
+    text-align: left;
+    border-radius: 5px;
+    width: 150px;
+    color: black;
+    font-size: 13px;
+    height: 20px;
+}
+.container-input-description{
+    width: 300px;
+    display:inline-flex;
+    height: 25px;
+    padding: 5px;
+    justify-content: center;
+}
+.text-description{
+    margin-top: 4px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+.icon-cancel-description, .icon-check-description{
+    margin-top: 10px;
+    margin-inline: 5px;
+    width: 30px !important;
+    height: 30px !important;
+    cursor: pointer;
+}
+.icon-cancel-description{
+    color: darkgray;
+}
+.icon-cancel-description:hover{
+    color: rgb(139, 139, 139);
+}
+.icon-check-description{
+    color: rgb(154, 204, 105);
+}
+.icon-check-description:hover{
+    color: rgb(109, 207, 11);
+}
+.input-description-error{
+    text-align: left;
+    border-radius: 5px;
+    width: 150px;
+    color: black;
+    font-size: 13px;
+    height: 20px;
+    border-color: tomato;
+    border-width: 0.5px;
+}
+.descriptionEdited{
+    margin: 5px !important;
 }

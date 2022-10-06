@@ -1,13 +1,11 @@
 .bt-add-chromebook{
-    margin: 20px;
-    width: 180px;
+    margin-bottom: 20px;
+    width: 160px;
     height: 40px;
-    color: black;
-    border-radius: 10px;
-    border-color: rgb(163, 163, 163);
-    border-width: 1px;
+    color: white;
+    border-radius: 5px;
+    background-color:  #289fd2;
 }
 .bt-add-chromebook:hover{
-    background-color: rgb(115, 118, 121);
-    color:white;
+    background-color: #0470aa;
 }
