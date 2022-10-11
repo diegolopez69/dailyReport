@@ -1,4 +1,4 @@
-.modalBackground-add{
+.modalBackground-chrome{
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -11,9 +11,9 @@
     align-items: center;
     z-index: 1;
 }
-.modalContainer-add{
+.modalContainer-chrome{
     width: 500px;
-    height: 430px;
+    height: 380px;
     border-radius: 5px;
     background-color: white;
     box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
@@ -21,13 +21,21 @@
     flex-direction: column;
     padding: 25px;
 }
-.bt-close-add{
+.bt-close-chrome{
     background-color: transparent;
     font-size: 20px;
     border: none;
     width: 20px;
 }
-.bt-add{
+.bt-cancel-chrome{
+    margin: 10px;
+    width: 100px;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+    color: black;
+}
+.bt-add-chrome{
     color: white;
     margin: 10px;
     width: 100px;
@@ -36,81 +44,62 @@
     text-align: center;
     background-color: rgb(154, 204, 105);
 }
-.bt-cancel-add{
-    margin: 10px;
-    width: 100px;
-    border-radius: 50px;
-    height: 30px;
-    text-align: center;
-    color: black;
-}
-.bt-add:hover{
+.bt-add-chrome:hover{
     background-color: rgb(109, 207, 11);
 }
-.bt-cancel-add:hover{
+.bt-cancel-chrome:hover{
     background-color:darkgray;
 }
-.container-row-name{
-    display: flex;
-    align-items: center;
+.body-chrome{
+    margin-bottom: 25px;
 }
-.container-row-email{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-}
-.container-row-password{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-}
-.container-row-rol{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-}
-.body-add input{
+.body-chrome input{
     border-color: transparent;
     text-align: left;
     margin: 20px 0px 0px 0px;
     width: 280px;
 }
-.body-add input:invalid{
+.body-chrome input:invalid{
     color: tomato;
 }
-.body-add input:valid + .icon-check{
+.body-chrome input:valid + .icon-check{
     visibility: visible;
 }
-.body-add h4{
+.body-chrome h4{
     margin: 20px 20px 0px 30px;
     justify-content: center;
     font-size: 15px;
     width: 80px;
 }
-.body-add hr{
+.body-chrome hr{
     text-align: right !important ;
     margin: 0px;
     width: 300px;
     margin-left: 120px;
 }
-.body-add .hr-select-add{
-    width: 30%;
-    margin-bottom: 20px;
+.container-row-number{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
 }
-.footer-add{
-    text-align: center;
+.container-row-sn{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
 }
-.textResult{
-    text-align: center;
-    width: 450px;
-    height: 30px;
-    margin-top: 10px;
-    color: rgb(148, 219, 40);
+.container-row-wardrobe{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
 }
+
 .icon-check{
     margin-top: 20px;
     width: 10px;
     height: 10px;
     color: greenyellow;
     visibility: hidden;
+}
+.footer-chrome{
+    text-align: center;
 }

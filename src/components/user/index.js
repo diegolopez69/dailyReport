@@ -7,12 +7,14 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const User =()=>{
     const [dataUser, setDataUser] = useState([])
+    const[autoRefesh, setAutoRefresh] = useState(true)
     const [dataToSearch, setDataToSearch] = useState(""); 
     useEffect(()=>{
+        
         getUsers()
         .then(response => setDataUser(response))
         .catch(error => console(error))
-    }, [dataUser ])
+    }, [dataUser])
 
     return (
         <div>
@@ -23,7 +25,7 @@ const User =()=>{
             <AddUser/>        
             <div className="col-12 row"> 
                 {dataUser.length === 0? "..error al cargar los datos": dataUser.filter(x => x.username.includes(dataToSearch) || x.email.includes(dataToSearch)).map((element)=>{
-                    return( <Card data={element}/>)
+                    return( <Card key={element.id} data={element}/>)
                 }) } 
             </div>                      
         </div>

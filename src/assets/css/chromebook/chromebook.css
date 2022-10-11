@@ -1,3 +1,8 @@
+.container-cards-chrome{
+    width: 100%;
+    display: inline-flex;
+    padding-left: 80px;
+}
 .bt-add-chromebook{
     margin-bottom: 20px;
     width: 160px;
@@ -8,4 +13,42 @@
 }
 .bt-add-chromebook:hover{
     background-color: #0470aa;
+}
+.search{
+    margin-bottom: 20px;
+    text-align: right;
+    width: 300px;
+    background-color:rgb(74,73,82);
+    float: right;
+    justify-content: right;
+    height: 50px;
+    border-radius: 30px;
+    margin-right: 100px;
+}
+.search input{
+    border: none;
+    background-color: transparent;
+    width: 230px;
+    color: white;
+    height: 50px;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+.search input::placeholder{
+    color: white;
+}
+.search button{
+    background-color: transparent;
+}
+.search .icon-search{
+    background-color: aliceblue;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    margin-right: 3px;
+}
+.search input:hover + .search{
+    background-color: aliceblue;
 }

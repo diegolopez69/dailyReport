@@ -4,8 +4,8 @@ import { deleteUser } from "../../data/user/deleteUser.js"
 const ModalDelete =({ openModal, idUser, username })=>{
 
     const toDelete =()=>{
-        // console.log("id user", id);
-        deleteUser( idUser ).then((response)=>{
+        
+        deleteUser( idUser ).then(()=>{
             console.log("SE borro el usuario");
         })
         openModal(false)

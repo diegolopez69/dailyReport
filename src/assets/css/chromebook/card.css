@@ -3,6 +3,7 @@
     height: 330px;
     width: 300px;
     background-color: aliceblue;
+    margin: 20px;
 }
 .container-icon{
     background  : linear-gradient(to left, #81b0f7, #3B8BF2 );

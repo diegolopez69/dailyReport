@@ -3,35 +3,71 @@ import { Row, Col, Tabs, Tab} from 'react-bootstrap'
 import CardChromebook from './CardChromebook'
 import Aux from '../../hooks/_Aux'
 import "../../assets/css/chromebook/chromebook.css"
+import { useState, useEffect } from 'react'
+import ModalAddChromebook from './ModalAddChromebook'
+import { getChromebooks } from '../../data/chromebook/getChromebooks'
+import SearchIcon from '@mui/icons-material/Search';
 
 const Chromebooks = () => {
+    const [openModal, setOpenModal] = useState(false);
+    const [chomebooks, setChromebooks] = useState([]);
+    const [dataToSearchTab1, setDataToSearchTab1] = useState("");
+    const [dataToSearchTab2, setDataToSearchTab2] = useState("");
+    const [dataToSearchTab3, setDataToSearchTab3] = useState("");
+
+
+    useEffect(()=>{ 
+        getChromebooks()
+        .then((resolve)=>setChromebooks(resolve))              
+    
+    }, [ chomebooks ])
+
     return (
         <Aux>
             <Row>
-                <Col>
-                    {/* <h5>Chromebooks Basic Tabs</h5> */}
+                <Col>                    
                     <hr />
-                    <button onClick={ ()=> alert("Botón en proceso, gracias por la comprensión")} className='bt-add-chromebook'>Nuevo Chromebook</button>
+                    <button onClick={ ()=> setOpenModal(true)} className='bt-add-chromebook'>Nuevo Chromebook</button>
+                    { openModal &&  <ModalAddChromebook openModal={setOpenModal} />}
                     <Tabs >
                         <Tab eventKey='armario1' title='Armario 1'>
-                            <CardChromebook/>
+                            <div className="search">
+                                <input onChange={(e)=> setDataToSearchTab1(e.target.value) } type="text" placeholder="Buscar chromebook"></input>
+                                <button><SearchIcon className="icon-search"/></button>
+                            </div> 
+                            <div className='container-cards-chrome col-12 row'>
+                                { chomebooks.length==0? "Se esta cargando los datos": chomebooks.filter((element)=> element.No_armario == 1).filter(x => x.No_chromebook.toString().includes(dataToSearchTab1) || x.No_sn.toString().includes(dataToSearchTab1)).map( (element)=>{
+                                    return(                                    
+                                        <CardChromebook key={element.Chromebook_id} data = {element}/>
+                                    )
+                                })}
+                            </div> 
                         </Tab>
                         <Tab eventKey='armario2' title='Armario 2'>
-                            <p>
-                                Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes
-                                anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR.
-                                Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
-                                odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint
-                                qui sapiente accusamus tattooed echo park.
-                            </p>
+                            <div className="search">
+                                <input onChange={(e)=> setDataToSearchTab2(e.target.value) } type="text" placeholder="Buscar chromebook"></input>
+                                <button><SearchIcon className="icon-search"/></button>
+                            </div> 
+                            <div className='container-cards-chrome col-12 row'>
+                                { chomebooks.length==0? "Se esta cargando los datos": chomebooks.filter((element)=> element.No_armario == 2).filter(x => x.No_chromebook.toString().includes(dataToSearchTab2) || x.No_sn.toString().includes(dataToSearchTab2)).map( (element)=>{
+                                    return(                                    
+                                        <CardChromebook key={element.Chromebook_id} data = {element}/>
+                                    )
+                                })}
+                            </div> 
                         </Tab>
                         <Tab eventKey='armario 3' title='Armario 3'>
-                            <p>
-                                Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify
-                                pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred
-                                pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them,
-                                vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.
-                            </p>
+                            <div className="search">
+                                <input onChange={(e)=> setDataToSearchTab3(e.target.value) } type="text" placeholder="Buscar chromebook"></input>
+                                <button><SearchIcon className="icon-search"/></button>
+                            </div> 
+                            <div className='container-cards-chrome col-12 row'>
+                                { chomebooks.length==0? "Se esta cargando los datos": chomebooks.filter((element)=> element.No_armario == 3).filter(x => x.No_chromebook.toString().includes(dataToSearchTab3) || x.No_sn.toString().includes(dataToSearchTab3)).map( (element)=>{
+                                    return(                                    
+                                        <CardChromebook key={element.Chromebook_id} data = {element}/>
+                                    )
+                                })}
+                            </div> 
                         </Tab>
                     </Tabs>  
                 </Col>
