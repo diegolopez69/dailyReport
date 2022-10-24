@@ -8,12 +8,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import "../../assets/css/chromebook/card.css"
 import ModalDeleteChromebook from "./ModalDeleteChromebook";
 import { putChromebook } from "../../data/chromebook/putChromebook";
-
-const 
-CardChromebook =( {data} )=>{
+import { putDescriptionChromebook } from "../../data/chromebook/putDescriptionChromebook";
+const CardChromebook =( {data} )=>{
 
     const [number, setNumber] = useState(data.No_chromebook);
-    const [description, setDescription] = useState(data.Descripcion);
+    const [descriptionData, setDescription] = useState(data.Descripcion + "");
     const [wardrobe, setWardrobe ] = useState(data.No_armario);
     const [sn, setSn] = useState(data.No_sn);
     const [stateChrome, setStateChrome] = useState(data.Estado);
@@ -23,31 +22,40 @@ CardChromebook =( {data} )=>{
     const [openModalDelete, setOpenModalDelete] = useState(false)
 
     const toEditDescription = ()=>{
-        if(description.length==0){            
+        if(descriptionData.length==0){            
             setTimeout(() => {
                 setErrorDescription(false) 
             }, 2000);           
             setErrorDescription(true)
         }else{
-            // putChromebook(data.Chromebook_id, sn, number, wardrobe).then(()=>console.log("Editado"))
-
-            setDescriptionEdited(true)
+            setDescriptionEdited(false)
             setErrorDescription(false)
-            setStateChrome(false)
-            alert("Editación")            
+            alert("Editación")
+            putDescriptionChromebook( data.Chromebook_id,  descriptionData,stateChrome ).then((resolve)=>{
+                console.log(resolve);
+            }).catch((error)=>{
+                console.log(error);
+            })   
         }
+        
     }
     const toEditBody =( )=>{
         putChromebook(data.Chromebook_id, sn, number, wardrobe).then(()=>console.log("Editado"))
         setStateEdit(false)
     }
     const toChangeState = ( event )=>{
-        if( event.target.value == "on" && description==""){            
+        if( event.target.value == "on" && descriptionData===""){            
             setStateChrome(false)
-        }else{
-            setDescriptionEdited(false)
-            setDescription("")
+            setDescriptionEdited(true)
+        }else if(event.target.value == "on" && descriptionData != ""){
             setStateChrome(true)
+            setDescription("")
+            setDescriptionEdited(false)
+            putDescriptionChromebook( data.Chromebook_id, "", true).then((resolve)=>{
+                console.log(resolve);
+            }).catch((error)=>{
+                console.log(error);
+            })
         }
     }
     return(
@@ -70,11 +78,12 @@ CardChromebook =( {data} )=>{
                             <p>Operativo: </p>
                             <label class="switch">
                                 <input type="checkbox"  checked={stateChrome} onClick={toChangeState}/>
+            
                                 <span class="slider round"></span>
                             </label>
                         </div>
 
-                    { !stateChrome && !descriptionEdited?
+                    { !stateChrome && descriptionEdited ?
                         <div>
                             <div className="container-input-description">
                                 <h4 className="text-description" >Descripción:</h4>
@@ -87,10 +96,10 @@ CardChromebook =( {data} )=>{
                         </div>                        
                         :
                         <div className="footer">
-                            { description==""? 
+                            { descriptionData==""? 
                                 <h6>{sn}</h6>:
                                 <>
-                                    <h6 className="descriptionEdited">{description}</h6>
+                                    <h6 className="descriptionEdited">{descriptionData}</h6>
                                     <h6>{sn}</h6>
                                 </>
                             }

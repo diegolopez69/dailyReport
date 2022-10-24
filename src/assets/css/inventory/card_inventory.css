@@ -1,0 +1,54 @@
+.container-tools{
+    background-color: #289fd2;
+    display:inline-flex;
+    height: 40px;
+    width: 430px;
+    justify-content: left;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    box-shadow: 0 5px 15px 0 rgb(0 0 0 / 20%);
+    border-radius: 5px;  
+    margin: 10px;
+}
+.text-name{
+    color: white;
+    margin-right: 25px;
+    margin-left: 25px;
+    width: 200px;
+}
+.icon-edit, .icon-delete{
+    color: white;
+    cursor: pointer;
+}
+.icon-delete{
+    
+}
+.text-id{
+    margin-left: 5px;
+    color: white;
+}
+.imput-name{
+    width: 150px;
+    background-color: white;
+    border: none;
+    margin-right: 20px;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+.imput-name::placeholder{
+    font-size: 12px;
+}
+.icon-check, .icon-close{
+    color: white;
+    cursor: pointer;
+}
+.select-type-tools{
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+.container-options-icon{
+    width: 50%;
+    text-align: right;
+}

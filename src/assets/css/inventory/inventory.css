@@ -1,0 +1,14 @@
+.tab-content-inventory{
+    width: 500px;
+}
+.bt-add{
+    margin-bottom: 20px;
+    width: 160px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    background-color:  #289fd2;
+}
+.bt-add-tool:hover{
+    background-color: #0470aa;
+}
