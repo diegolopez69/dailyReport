@@ -24,7 +24,7 @@ const User =()=>{
             </div> 
             <AddUser/>        
             <div className="col-12 row"> 
-                {dataUser.length === 0? "..error al cargar los datos": dataUser.filter(x => x.username.includes(dataToSearch) || x.email.includes(dataToSearch)).map((element)=>{
+                {dataUser.length === 0? "..error al cargar los datos": dataUser.filter( ( u )=> localStorage.getItem('user') != u.username.toLowerCase() ).filter(x => x.username.includes(dataToSearch) || x.email.includes(dataToSearch)).map((element)=>{
                     return( <Card key={element.id} data={element}/>)
                 }) } 
             </div>                      

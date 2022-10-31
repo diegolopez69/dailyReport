@@ -1,0 +1,72 @@
+.background-computer{
+    border-radius: 20px;
+    height: 260px;
+    width: 280px;
+    background-color: aliceblue;
+    margin: 20px;
+}
+.container-icon-computer{
+    background  : linear-gradient(to left, #81b0f7, #3B8BF2 );
+    height: 80px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding-top: 20px;
+}
+.container-icon-computer .border-icon-computer{
+    background-color: white;
+    height: 120px;
+    width: 120px;
+    display: block;
+    border-radius: 80px;
+    margin-left: 28%;
+    border-width: 20px;   
+    text-align: center;
+}
+
+.border-icon-computer .icon-computer{
+    width: 80px;
+    height: 80px;
+    color: black;
+    margin-top: 20px;
+    border-width: 100px;
+    background-color: transparent;
+}
+.container-options-computer{
+    color: white;
+    text-align: right;
+    margin-right: 10px;
+}
+.text-computer-name{
+    margin-top: 20px;
+    text-align: center;
+}
+.icon-edit-computer, .icon-delete-computer{
+    cursor: pointer;
+}
+
+.input-computer-name{
+    border: none;
+    border-radius: 5px;
+    margin-right: 4px;
+}
+.container-body-edit{
+    margin-top: 20px;
+    text-align: center;
+}
+.icon-check-compu, .icon-close-computer{
+    cursor: pointer;
+    
+}
+.index-computer{
+    width: 30px;
+    height:30px;
+    color: black;
+    margin: 0px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    display: flex;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+}

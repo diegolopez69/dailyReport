@@ -38,7 +38,7 @@
 .imput-name::placeholder{
     font-size: 12px;
 }
-.icon-check, .icon-close{
+.icon-check-tool, .icon-close{
     color: white;
     cursor: pointer;
 }

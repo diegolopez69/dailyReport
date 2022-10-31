@@ -1,7 +1,7 @@
 .tab-content-inventory{
     width: 500px;
 }
-.bt-add{
+.bt-add-tools{
     margin-bottom: 20px;
     width: 160px;
     height: 40px;
@@ -9,6 +9,6 @@
     border-radius: 5px;
     background-color:  #289fd2;
 }
-.bt-add-tool:hover{
+.bt-add-tools:hover{
     background-color: #0470aa;
 }

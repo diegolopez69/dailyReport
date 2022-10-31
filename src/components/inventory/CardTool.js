@@ -34,13 +34,13 @@ const CardInvetory = ({data, index})=> {
             { editBody?
                 <>
                     <h4 className="text-id">{index}</h4>
-                    <imput placeholder="Tipo de Herramienta" ></imput>
+                    {/* <input placeholder="Tipo de Herramienta" ></input> */}
                     <input placeholder="Nombre de la herramienta" defaultValue={nameTool} className="imput-name" onChange={(e)=>setNameTool(e.target.value)}/>
                     <select value={typeTool} className="select-type-tools" onChange={(e)=>setTypeTool(e.target.value)}  required>
                             <option value="Software" >Software</option>
                             <option value="Hardware">Hardware</option>
                     </select>
-                    <CheckIcon onClick={toEdit} className="icon-check"/>
+                    <CheckIcon onClick={toEdit} className="icon-check-tool"/>
                     <CloseIcon onClick={()=>setEditBody(false)} className="icon-close"/>
                 </>                
             :

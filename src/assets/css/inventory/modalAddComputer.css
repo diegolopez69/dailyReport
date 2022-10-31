@@ -1,0 +1,96 @@
+.modalBackground-computer{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    background-color: rgb(199, 199, 199);
+    position:fixed;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.modalContainer-computer{
+    width: 500px;
+    height: 250px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
+    display: flex ;
+    flex-direction: column;
+    padding: 25px;
+}
+.bt-close-computer{
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    width: 20px;
+}
+.bt-cancel-computer{
+    margin: 10px;
+    width: 100px;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+    color: black;
+}
+.bt-add-computer{
+    color: white;
+    margin: 10px;
+    width: 100px;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+    background-color: rgb(154, 204, 105);
+}
+.bt-add-computer:hover{
+    background-color: rgb(109, 207, 11);
+}
+.bt-cancel-computer:hover{
+    background-color:darkgray;
+}
+.body-computer{
+    margin-bottom: 45px;
+}
+.body-computer input{
+    border-color: transparent;
+    text-align: left;
+    margin: 0px 0px 0px 0px;
+    width: 280px;
+}
+.body-computer input:invalid{
+    color: tomato;
+}
+.body-computer input:valid + .icon-check{
+    visibility: visible;
+}
+.body-computer h4{
+    margin: 0px 20px 0px 30px;
+    justify-content: center;
+    font-size: 15px;
+    width: 80px;
+}
+.body-computer hr{
+    text-align: right !important ;
+    margin: 0px;
+    width: 300px;
+    margin-left: 120px;
+}
+
+.container-name-computer{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.icon-check-computer{
+    margin-top: 20px;
+    width: 10px;
+    height: 10px;
+    color: greenyellow;
+    visibility: hidden;
+}
+.footer-computer{
+    text-align: center;
+}

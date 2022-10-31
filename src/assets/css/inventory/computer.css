@@ -1,0 +1,52 @@
+.container-cards-computer{
+
+}
+.bt-toAdd-computer{
+    margin-bottom: 20px;
+    width: 160px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    background-color:  #289fd2;
+}
+.bt-add-computer:hover{
+    background-color: #0470aa;
+}
+.search-computer{
+    margin-bottom: 20px;
+    text-align: right;
+    width: 300px;
+    background-color:rgb(74,73,82);
+    float: right;
+    justify-content: right;
+    height: 50px;
+    border-radius: 30px;
+    margin-right: 100px;
+}
+.search-computer input{
+    border: none;
+    background-color: transparent;
+    width: 230px;
+    color: white;
+    height: 50px;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+.search-computer input::placeholder{
+    color: white;
+}
+.search-computer button{
+    background-color: transparent;
+}
+.search-computer .icon-search-computer{
+    background-color: aliceblue;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    margin-right: 3px;
+}
+.search-computer input:hover + .search-computer{
+    background-color: aliceblue;
+}

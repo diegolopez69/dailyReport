@@ -6,17 +6,23 @@ const ModalAddUser =({ openModal })=>{
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [rol, setRol] =useState("")
+    const [rol, setRol] =useState(["user"])
 
     const [ textResult, setTextResult] = useState("");
     const [textError, setTextError] = useState("");
 
     const createUser = ()=>{
+        if(rol === "moderator"){
+            setRol(["user", "moderator"]);
+        }else if(rol === "admin" ){
+            setRol(["user", "moderator", "admin"]);
+        }
+        
         const data = {            
             username: username,
             email: email,
             password:password,
-            rol:rol === "null" ? ["user"]: [rol]
+            rol:rol
         }
         postUser( data ).then((resolve)=>{
             resetStates()
@@ -58,7 +64,6 @@ const ModalAddUser =({ openModal })=>{
                     <div className="container-row-rol">
                         <h4>Rol:</h4>
                         <select defaultValue={rol} name="Roles" value={rol} placeholder="Rol" onChange={( e )=> setRol(e.target.value)} className="select-edit" required>
-                            <option selected>Seleccione un rol</option>
                             <option value="user" >Usuario</option>
                             <option value="moderator">Moderador</option>
                             <option value="admin">Administrador</option> 
