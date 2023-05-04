@@ -1,8 +1,8 @@
 import React from 'react'
 
-const index = () => {
+const index =() => {
   return (
-    <div>index</div>
+    <div>Este es el campo de Revision</div>
   )
 }
 

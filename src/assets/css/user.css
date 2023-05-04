@@ -40,3 +40,28 @@
 .search input:hover + .search{
     background-color: aliceblue;
 }
+.container-cards-userprofiles{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 868px) {
+    .container-cards-userprofiles {
+      grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 1461px){
+    .container-cards-userprofiles {
+        grid-template-columns: repeat(3, 1fr);
+      }
+}
+@media (max-width: 1800px){
+    .container-cards-userprofiles {
+        grid-template-columns: repeat(4, 1fr);
+      }
+}
+  
+@media (max-width: 480px) {
+.container-cards-userprofiles {
+    grid-template-columns: 1fr;
+}
+}

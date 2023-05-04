@@ -15,19 +15,32 @@ const User =()=>{
         .then(response => setDataUser(response))
         .catch(error => console(error))
     }, [dataUser])
-
+    const dataExample = {
+        username :"Billy",
+        email:"billy@xd.com"
+    }
+  
     return (
         <div>
             <div className="search">
                 <input onChange={(e)=> setDataToSearch(e.target.value) } type="text" placeholder="Buscar usuario"></input>
                 <button><SearchIcon className="icon-search"/></button>
             </div> 
-            <AddUser/>        
-            <div className="col-12 row"> 
+            <AddUser/>
+            <div className="container-cards-userprofiles">
+                <Card key={1} data={dataExample}/>
+                <Card key={1} data={dataExample}/>
+                <Card key={1} data={dataExample}/>
+                <Card key={1} data={dataExample}/>
+                <Card key={1} data={dataExample}/>
+                <Card key={1} data={dataExample}/>
+                
+            </div>                   
+            {/* <div className="col-12 row"> 
                 {dataUser.length === 0? "..error al cargar los datos": dataUser.filter(x => x.username.includes(dataToSearch) || x.email.includes(dataToSearch)).map((element)=>{
                     return( <Card key={element.id} data={element}/>)
                 }) } 
-            </div>                      
+            </div>                       */}
         </div>
     )
 }

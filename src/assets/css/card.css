@@ -1,6 +1,6 @@
 .Card{
     margin: 20px;
-    width: 230px;
+    width: 258px;
     height: 330px; 
     border-radius: 20px;
     background-color: aliceblue;
@@ -30,6 +30,7 @@
 }
 .lower-container{
     margin-top: 70px;
+    width: 258px;
 }
 .lower-container h4{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -41,11 +42,13 @@
 }
 .lower-container h3{
     word-break:break-all;
+    width: 258px;
 }
 .lower-rol-container h5{
     font-size: 13px;
     text-decoration: none;
     margin-top: 10px;
+    width: 258px;
 }
 
 .lower-container .button-delete{

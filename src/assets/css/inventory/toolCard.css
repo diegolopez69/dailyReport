@@ -1,0 +1,22 @@
+.container-tool-invetory{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+.container-tool-invetory p{
+    text-align: center;
+    text-justify: auto;
+    margin: 0px;
+    margin-inline: 10px;    
+}
+.icon-edit-tool,  .icon-delete-tool{
+    height: 20px !important;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 20px !important;
+    padding-bottom: 2.5px;
+}
+.icon-edit-tool:hover , .icon-delete-tool:hover{
+    cursor:pointer;
+    color: rgb(15, 15, 15);
+}

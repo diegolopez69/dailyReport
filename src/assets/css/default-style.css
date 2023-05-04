@@ -1,0 +1,162 @@
+.icon-edit{
+    margin: 10px;
+    cursor: pointer;
+}
+.icon-delete{
+    margin: 10px;
+    cursor: pointer;
+}
+.icon-delete:hover, .icon-edit:hover{
+    color: #6e7379;
+}
+
+.icon-delete:active, .icon-edit:active{
+    color: #000000;
+}
+/* 
+modal default */
+
+.modalBackground{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    background-color: rgb(199, 199, 199);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.modalContainer{
+    text-align: center;
+    width: 500px;
+    height: 250px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
+    display: table !important;
+    flex-direction: column;
+    padding: 25px;
+}
+.modalContainer .bt-close{
+    color: #000000;
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    width: 20px;
+}
+/* 
+modal delete default */
+
+.bt-cancel, .bt-continue{
+    color: black;
+    margin: 10px;
+    width: 100px;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+}
+.bt-continue{
+    background-color: rgb(255, 57, 96);
+    color: rgb(235, 238, 241);
+}
+.bt-cancel:hover{
+    background-color:darkgray;
+}
+.bt-continue:hover{
+    background-color: crimson;
+}
+.text-delete{
+    margin-bottom: 6%;
+    margin-top: 10%;
+}
+.header-modal{
+    text-align: right;
+}
+/* button-save */
+.bt-edit{
+    color: white;
+    margin: 10px;
+    width: 100px;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+    background-color: rgb(154, 204, 105);
+}
+.bt-edit:hover{
+    background-color: rgb(109, 207, 11);
+}
+
+/* default inputs */
+/* .container-row{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+} */
+.container-row-name{
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.body-add-edit-item{
+    margin-bottom: 10%;
+}
+.body-add-edit-item input{
+    border-color: transparent;
+    margin: 20px 0px 0px 0px;
+    width:200px;
+}
+.body-add-edit-item h4{
+    margin: 5% 3% 0 25%;
+    text-align: center;
+    font-size: 15px;
+    width: 80px;
+}
+.body-add-edit-item hr{
+    margin: 0px;
+    width: 30%;
+    margin-left: 46%;
+}
+.container-row-type{
+    margin-top: 8%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+.container-row-type h4{
+    margin-top: 1%;
+}
+/* 
+lodader default */
+.loader-container{
+    display: inline-block;
+    text-align: center;
+    padding: 7%;
+}
+
+/* response :default delete*/
+.continer-result{
+    display: inline-block;
+    text-align: center;
+    padding: 7%;
+    margin-top: 7%;
+}
+.response-result-text{
+    font-size: 120%;
+    width: 100%;
+    color: #000000;
+    margin-bottom: 5%;
+}
+.icon-check-delete{
+    color: rgb(154, 204, 105);
+    width: 20% !important ;
+    height: 15% !important;
+}
+.icon-error-delete{
+    color: tomato;
+    width: 20% !important;
+    height: 15% !important;
+}

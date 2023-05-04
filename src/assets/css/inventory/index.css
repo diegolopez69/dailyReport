@@ -1,0 +1,14 @@
+.bt-add-inventory{
+    margin-bottom: 20px;
+    width: 160px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    background-color:  #289fd2;
+}
+.bt-add-inventory:hover{
+    background-color: #0470aa;
+}
+.header-container-inventory{
+    text-align: right;
+}

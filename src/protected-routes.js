@@ -6,24 +6,20 @@ global.jQuery = $
 
 const Error403 = React.lazy(() => import('./App/components/error403'))
 const User =  React.lazy(() => import('./components/user'))
-const Example = React.lazy(() => import('./components/example'))
-const Chromebooks = React.lazy(() => import('./components/chromebooks'))
+const Items = React.lazy(() => import('./components/items'))
 const Inventory = React.lazy(() => import('./components/inventory'))
-const Check = React.lazy(() => import('./components/check-classroom'))
-const Book = React.lazy(() => import('./components/book-classroom'))
+const Computers = React.lazy(() => import('./components/computers'))
+const Revision = React.lazy(() => import('./components/revision'))
+const Classrooms = React.lazy(() => import('./components/classrooms'))
 const Reports = React.lazy(() => import('./components/reports'))
-
-
-
-
-
 
 const routes = [
     { path: '/user', exact: true, name: 'User', component: User },
+    { path: '/items', exact: true, name: 'Ítems', component: Items },
     { path: '/inventory', exact: true, name: 'Inventory', component: Inventory },
-    { path: '/chromebooks', exact: true, name: 'Chromebooks', component: Chromebooks },
-    { path: '/check-classroom', exact: true, name: 'Check', component: Check },
-    { path: '/book-classroom', exact: true, name: 'Book', component: Book },
+    { path: '/computers', exact: true, name: 'Computers', component: Computers },
+    { path: '/classrooms', exact: true, name: 'Classrooms', component: Classrooms },
+    { path: '/revision', exact: true, name: 'Revision', component: Revision },
     { path: '/reports', exact: true, name: 'Reports', component: Reports },
     { path: '/error-403', exact: true, name: 'Error403', component: Error403 },
 ]

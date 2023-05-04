@@ -1,0 +1,40 @@
+.modalBackground-check-classroom{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    background-color: rgb(199, 199, 199);
+    position:fixed;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.modalContainer-check-classroom{
+    width: 500px;
+    height: 380px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
+    display: flex ;
+    flex-direction: column;
+    padding: 25px;
+}
+.bt-close-check-classroom{
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    width: 20px;
+}
+.footer-check-classroom{
+    text-align: center;
+}
+.tile-type-tools{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.tile-type-tools h6{
+    margin: 10px;
+}

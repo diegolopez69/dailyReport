@@ -15,7 +15,7 @@ const Card =( {data} )=>{
 
     
     return (
-        <div className="Card col-2">
+        <div className="Card">
             <div className="upper-container">
                 <div className="icon-container">
                     <AccountCircleIcon className="icon-user"></AccountCircleIcon>
@@ -29,9 +29,10 @@ const Card =( {data} )=>{
             </div>
             <div className="lower-rol-container">
                 <h5>{rol}</h5>
+                {openModalEdit && <ModalEdit openModal={setOpenModalEdit} data={data}/>}
+                {openModalDelete && <ModalDelete openModal={setOpenModalDelete} idUser = {data.id} username={data.username} />}
             </div>
-            {openModalEdit && <ModalEdit openModal={setOpenModalEdit} data={data}/>}
-            {openModalDelete && <ModalDelete openModal={setOpenModalDelete} idUser = {data.id} username={data.username} />}
+            
         </div>
 
     )
