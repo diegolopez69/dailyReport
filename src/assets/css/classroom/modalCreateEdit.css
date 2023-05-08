@@ -1,0 +1,17 @@
+.container-row-floor{
+    margin-top: 8%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+.container-row-number{
+    margin-top: 8%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+.input-number{
+    border-color: transparent;
+    margin: 20px 0px 0px 0px;
+    width: 20%cd  !important;
+}

@@ -22,7 +22,7 @@ const ModalCreateEditItem =({ openModal, item })=>{
                 <div className="header-modal">
                 <button className="bt-close" onClick={()=> openModal(false)}>X</button>
                 </div>
-                <div className="body-add-edit-item">
+                <div className="body-add-edit">
                     <div className="container-row-name">
                         <h4>Nombre:</h4>
                         <input type="text" defaultValue={currentItem.Name} onChange={( e )=> setCurrentItem( {...currentItem, Name: e.target.value})} placeholder="Nombre" required></input>

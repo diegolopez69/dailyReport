@@ -88,7 +88,22 @@ modal delete default */
 .bt-edit:hover{
     background-color: rgb(109, 207, 11);
 }
+/* button ad default */
 
+.bt-add{
+    margin-bottom: 20px;
+    width: 160px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    background-color:  #289fd2;
+}
+.bt-add:hover{
+    background-color: #0470aa;
+}
+.header-container{
+    text-align: right;
+}
 /* default inputs */
 /* .container-row{
     margin-top: 20px;
@@ -101,21 +116,21 @@ modal delete default */
     align-items: center;
     text-align: center;
 }
-.body-add-edit-item{
+.body-add-edit{
     margin-bottom: 10%;
 }
-.body-add-edit-item input{
+.body-add-edit input{
     border-color: transparent;
     margin: 20px 0px 0px 0px;
     width:200px;
 }
-.body-add-edit-item h4{
+.body-add-edit h4{
     margin: 5% 3% 0 25%;
     text-align: center;
     font-size: 15px;
     width: 80px;
 }
-.body-add-edit-item hr{
+.body-add-edit hr{
     margin: 0px;
     width: 30%;
     margin-left: 46%;

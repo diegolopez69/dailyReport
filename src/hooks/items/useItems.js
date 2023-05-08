@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react"
 import { ToolType } from "../login/default-data";
 import axios from 'axios';
@@ -30,11 +29,11 @@ export const useItems = (type)=>{
     const dataHardware = tools.filter(row => row.Type == ToolType.hardware);
     const deleteItemById = async({Tool_id})=>{
         const result = await axios.delete(url_api+`/api/tool/${Tool_id}`,{
-            headers: {
-              'x-access-token': localStorage.getItem('token'),
-              'Content-Type': 'application/json'
-            }
-          })
+                headers: {
+                  'x-access-token': localStorage.getItem('token'),
+                  'Content-Type': 'application/json'
+                }
+              })
         .then(response => response.data.status)
         .catch(error => {
             console.log("Error", error);
