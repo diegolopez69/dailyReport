@@ -6,9 +6,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModalDelete from "./ModalDelete";
 import ModalEdit from "./ModalEdit";
 const Card =( {data} )=>{
-    const [username, setUsername] = useState("root");
-    const [email, setEmail] = useState("root@gmail.com");
-    const [rol, setRol] = useState("admin");
 
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [openModalEdit, setOpenModalEdit] = useState(false)
@@ -28,7 +25,7 @@ const Card =( {data} )=>{
                 <span onClick={()=> setOpenModalDelete(true)}><DeleteIcon/></span>                
             </div>
             <div className="lower-rol-container">
-                <h5>{rol}</h5>
+                <h5>{data.roles.length == 3? "Admin":(data.roles.length == 2? "Moderator": "User")}</h5>
                 {openModalEdit && <ModalEdit openModal={setOpenModalEdit} data={data}/>}
                 {openModalDelete && <ModalDelete openModal={setOpenModalDelete} idUser = {data.id} username={data.username} />}
             </div>

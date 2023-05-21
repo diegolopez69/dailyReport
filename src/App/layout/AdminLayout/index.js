@@ -35,6 +35,7 @@ class AdminLayout extends Component {
 
     render() {
         const jwt_token = localStorage.getItem('token')
+        const user_role = localStorage.getItem('rol')
         /* full screen exit call */
         document.addEventListener('fullscreenchange', this.fullScreenExitHandler)
         document.addEventListener('webkitfullscreenchange', this.fullScreenExitHandler)
@@ -42,7 +43,13 @@ class AdminLayout extends Component {
         document.addEventListener('MSFullscreenChange', this.fullScreenExitHandler)
 
         const menu = routes.map((route, index) => {
-            return route.component ? <Route key={index} path={route.path} exact={route.exact} name={route.name} render={props => <route.component {...props} />} /> : null
+            return route.component && route.rol == 1? <Route key={index} path={route.path} exact={route.exact} name={route.name} render={props => <route.component {...props} />} /> : null
+        })
+        const menuModerator = routes.map((route, index) => {
+            return route.component && route.rol <= 2? <Route key={index} path={route.path} exact={route.exact} name={route.name} render={props => <route.component {...props} />} /> : null
+        })
+        const menuAdmin = routes.map((route, index) => {
+            return route.component && route.rol <= 3? <Route key={index} path={route.path} exact={route.exact} name={route.name} render={props => <route.component {...props} />} /> : null
         })
 
         return (
@@ -59,7 +66,9 @@ class AdminLayout extends Component {
                                         <div className='page-wrapper'>
                                             <Suspense fallback={<Loader />}>
                                                 <Switch>
-                                                    {jwt_token && menu}
+                                                    { 
+                                                        jwt_token && (user_role == 1?menu:(user_role == 2?menuModerator: menuAdmin) )
+                                                    }
                                                     <Redirect from='/' to={jwt_token ? this.props.homePath : this.props.defaultPath} />
                                                 </Switch>
                                             </Suspense>

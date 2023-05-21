@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import 'rsuite/dist/rsuite.min.css'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App/index'
 import * as serviceWorker from './serviceWorker'
 import reducer from './store/reducer'

@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react"
-import { ToolType } from "../login/default-data";
 import axios from 'axios';
-export const useItems = (type)=>{
-    const [tools, setTools] = useState([]);
+export const useUser = ()=>{
+    const [users, setUsers] = useState([]);
     const url_api = process.env.REACT_APP_BASE_API;
     useEffect(()=>{
       const fetchData = async()=>{
-        await axios.get(url_api+'/api/tool',{
+        await axios.get(url_api+'/api/user-roles',{
           headers: {
             'x-access-token': localStorage.getItem('token'),
             'Content-Type': 'application/json'
           }
         })
         .then(response => {
-          setTools(response.data)
+            setUsers(response.data)
         })
         .catch(error => {
             console.log("Error", error);
@@ -23,12 +22,11 @@ export const useItems = (type)=>{
       fetchData();
       
         
-    }, [tools])
+    }, [users])
 
-    const dataSoftware = tools.filter(row => row.Type == ToolType.software);
-    const dataHardware = tools.filter(row => row.Type == ToolType.hardware);
-    const deleteItemById = async({Tool_id})=>{
-        const result = await axios.delete(url_api+`/api/tool/${Tool_id}`,{
+    const usersGeneral = users.filter(row => row.email != localStorage.getItem('email'));
+    const deleteUserById = async({Tool_id})=>{
+        const result = await axios.delete(url_api+`/api/user/${Tool_id}`,{
                 headers: {
                   'x-access-token': localStorage.getItem('token'),
                   'Content-Type': 'application/json'
@@ -40,8 +38,8 @@ export const useItems = (type)=>{
         });
         return result;
     }
-    const editItemById = async(item)=>{
-        const result = await axios.put(url_api+`/api/tool/${item.Tool_id}`, item,{
+    const editUserById = async(user)=>{
+        const result = await axios.put(url_api+`/api/user/${user.id}`, user,{
             headers: {
               'x-access-token': localStorage.getItem('token'),
               'Content-Type': 'application/json'
@@ -53,9 +51,9 @@ export const useItems = (type)=>{
         });
         return result;
     }
-    const createItem = async(item)=>{
+    const createUser = async(user)=>{
       
-      const result = await axios.post(url_api+`/api/tool`, item,{
+      const result = await axios.post(url_api+`/api/auth/signup`, user,{
           headers: {
             'x-access-token': localStorage.getItem('token'),
             'Content-Type': 'application/json'
@@ -68,5 +66,5 @@ export const useItems = (type)=>{
       return result;
     }
   
-    return {tools, dataSoftware, dataHardware, deleteItemById, editItemById, createItem}
+    return {usersGeneral, editUserById, deleteUserById, createUser}
 }

@@ -1,7 +1,7 @@
-.Card{
+.Card-computer{
     margin: 20px;
     width: 258px;
-    height: 330px; 
+    height: 300px; 
     border-radius: 20px;
     background-color: aliceblue;
     text-align: center;
@@ -9,29 +9,35 @@
     padding: 0px;
     
 }
-.upper-container{
+.upper-container-computer{
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     height: 100px;
     width: 258px;
+    display: block;
     background: #289fd2;
 }
 
-.icon-container .icon-user{
-    width: 100px;
-    height: 100px;
-    border-radius: 100%;
-    background-color: white;
-    margin: 20px;
-    margin-top: 55px;
-    border-color: black;
-    color: rgb(182, 182, 182);
-    
+.icon-computer{
+    background-color: transparent;
+    border-radius: 5%;
+    color:black;
+    margin-top: 18%;
+    height: 10% !important;
+    width: 42% !important;
+}
+
+.icon-container {
+    text-align: center;
+    background-color: transparent;
+    align-content: center;
 }
 .lower-container{
     margin-top: 70px;
     width: 258px;
 }
+
+    
 .lower-container h4{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 110%;

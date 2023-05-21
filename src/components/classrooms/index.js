@@ -9,8 +9,7 @@ import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useClassrooms } from '../../hooks/classrooms/useClassrooms';
-import TablePagination from '@mui/material/TablePagination';
-import { TableFooter } from '@mui/material';
+import { TableFooter, TablePagination } from '@mui/material';
 import ModalCreateEditClassroom from './ModalCreateEditClassroom';
 import ModalDeleteClassroom from './ModalDeleteClassroom';
 const Classrooms =()=> {
@@ -44,49 +43,50 @@ const Classrooms =()=> {
     <>
       <div>
       <div className='header-container'> 
-        <button className='bt-add' onClick={()=>createItem()}>Nueva Aula</button>
+        <button className='bt-add-modal' onClick={()=>createItem()}>Nueva Aula</button>
       </div>
       <div className='container-table-classrooms'>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650}} aria-label="simple table">
-              <TableHead>
+        <TableContainer component={Paper} sx={{ minWidth: 150, align:"center"}} >
+          <Table sx={{ minWidth: 150, maxWidth: 900}} aria-label="simple table" align="center">
+              <TableHead >
               <TableRow>
-                  <TableCell>Nº</TableCell>
-                  <TableCell align="right">Planta</TableCell>
-                  <TableCell align="right">Número</TableCell>
-                  <TableCell align="right">Acciones</TableCell>
+                  <TableCell width="70px" height="80px"> Nº</TableCell>
+                  <TableCell width="100px" align="center">Planta</TableCell>
+                  <TableCell  width="100px" align="center">Número</TableCell>
+                  <TableCell  width="100px" align="center">Acciones</TableCell>
               </TableRow>
               </TableHead>
 
               <TableBody>
               {(rowsPerPage > 0
-            ? classrooms.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : classrooms)
-          .map((row, index) => (
+                  ? classrooms.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : classrooms)
+                .map((row, index) => (
                   <TableRow
-                  key={row.Classroom_id} tabIndex={-1} 
+                  key={index}
                   >
-                  <TableCell component="th" scope="row">
+                  <TableCell>
                       {row.Classroom_id}
                   </TableCell>
-                  <TableCell align="right">{row.Floor}</TableCell>
-                  <TableCell align="right">{row.Number}</TableCell>
-                  <TableCell align="right"><EditIcon className='icon-edit' onClick={()=>editItem(row)}/><DeleteIcon className='icon-delete' onClick={()=>deleteItem(row)} /></TableCell>
+                  <TableCell align="center">{row.Floor}</TableCell>
+                  <TableCell align="center">{row.Number}</TableCell>
+                  <TableCell align="center"><EditIcon className='icon-edit' onClick={()=>editItem(row)}/><DeleteIcon className='icon-delete' onClick={()=>deleteItem(row)} /></TableCell>
                   
                   </TableRow>
               ))}
               </TableBody> 
-              <TableFooter>
-                <TableRow>  
+              <TableFooter >
+                <TableRow >  
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, 100]}
-                  component="div"
                   count={classrooms.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
                   labelRowsPerPage='Fila por pagina'
+                  labelDisplayedRows={({ from, to, count }) => `Mostrando ${from} al ${to} de ${count} elementos`}
+                  style={{ justifyContent: 'center'}}
                 />
                 </TableRow>
               </TableFooter>            

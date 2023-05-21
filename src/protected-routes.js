@@ -14,14 +14,14 @@ const Classrooms = React.lazy(() => import('./components/classrooms'))
 const Reports = React.lazy(() => import('./components/reports'))
 
 const routes = [
-    { path: '/user', exact: true, name: 'User', component: User },
-    { path: '/items', exact: true, name: 'Ítems', component: Items },
-    { path: '/inventory', exact: true, name: 'Inventory', component: Inventory },
-    { path: '/computers', exact: true, name: 'Computers', component: Computers },
-    { path: '/classrooms', exact: true, name: 'Classrooms', component: Classrooms },
-    { path: '/revision', exact: true, name: 'Revision', component: Revision },
-    { path: '/reports', exact: true, name: 'Reports', component: Reports },
-    { path: '/error-403', exact: true, name: 'Error403', component: Error403 },
+    { path: '/user', exact: true, name: 'User', component: User , rol:3},
+    { path: '/items', exact: true, name: 'Ítems', component: Items, rol:1},
+    { path: '/inventory', exact: true, name: 'Inventory', component: Inventory, rol: 2},
+    { path: '/computers', exact: true, name: 'Computers', component: Computers, rol:1 },
+    { path: '/classrooms', exact: true, name: 'Classrooms', component: Classrooms, rol:1},
+    { path: '/revision', exact: true, name: 'Revision', component: Revision, rol:1 },
+    { path: '/reports', exact: true, name: 'Reports', component: Reports, rol:1},
+    { path: '/error-403', exact: true, name: 'Error403', component: Error403, rol:1 },
 ]
 
 export default routes

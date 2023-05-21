@@ -4,7 +4,6 @@ import './../../assets/scss/style.scss'
 import Aux from '../../hooks/_Aux'
 import background from '../../assets/images/background.jpg'
 import { useFetchInitLogin } from '../../hooks/login'
-import logoKronos from '../../assets/images/logo_kronos.svg'
 
 const Login = () => {
     const FetchInitLogin = useFetchInitLogin()
@@ -77,9 +76,6 @@ const Login = () => {
 
 
                                 <div className='mb-3 ml-2 text-center'>
-                                            <spam className='cursor'>
-                                                Registrate
-                                            </spam>
                                 </div>
 
 
@@ -87,8 +83,6 @@ const Login = () => {
                                 <button className='col-12 btn btn-primary shadow-1 mb-2 mt-2 btn-md btn-pill'>
                                     Acceder
                                 </button>
-
-                                
                             </div>
                         </div>
                     </div>

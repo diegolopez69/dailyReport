@@ -1,0 +1,49 @@
+
+.container-classrooms{
+    /* margin: 3% !important;  */
+}
+.container-classrooms button{
+    /* display: grid; */
+    font-size: 110%;
+    margin: 1%;
+}
+.modalBackground-inventory-especific{
+    width: 100vw;
+    height: 100vh;
+    padding-left: 10%;
+    padding-bottom: 20%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    background-color: rgb(199, 199, 199);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.modalContainer-inventory-especific{
+    text-align: center;
+    width: 1000px;
+    height: 250px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
+    display: table !important;
+    flex-direction: column;
+    padding: 25px;
+}
+.tittle-header-modal-inventory{
+    text-align: left;
+    margin-top: 3%;
+    margin-bottom: 4%;
+}
+.tittle-header-modal-inventory h5{
+    color: gray;
+}
+.container-header-bt-add{
+    text-align: right;
+    margin-bottom: 2%;
+}

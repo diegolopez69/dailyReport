@@ -1,14 +1,25 @@
-.bt-add-inventory{
-    margin-bottom: 20px;
-    width: 160px;
-    height: 40px;
-    color: white;
+.accordion-header-inventory{
+    width: 100%;
+    text-align: center;
+    height: 1% !important;
+    justify-content: center;
+    background-color: #289fd2 !important;
     border-radius: 5px;
-    background-color:  #289fd2;
+    
 }
-.bt-add-inventory:hover{
-    background-color: #0470aa;
+.tittle-accordion-body{
+    font-size: 130%;
+    color: gray;
 }
-.header-container-inventory{
-    text-align: right;
+.accordion-button{
+    background-color: transparent !important;
+    color: aliceblue;
+    font-size: 60%;
+    margin-bottom: 0.9%;
+}
+.accordion-body{
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1.5%;
+    margin-bottom: 2%;
 }

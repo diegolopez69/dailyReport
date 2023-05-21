@@ -1,34 +1,29 @@
 import { useState, useEffect } from "react"
 import { ToolType } from "../login/default-data";
 import axios from 'axios';
-export const useItems = (type)=>{
-    const [tools, setTools] = useState([]);
+export const useComputers = (type)=>{
+    const [computers, setComputers] = useState([]);
     const url_api = process.env.REACT_APP_BASE_API;
     useEffect(()=>{
       const fetchData = async()=>{
-        await axios.get(url_api+'/api/tool',{
+        await axios.get(url_api+'/api/computer',{
           headers: {
             'x-access-token': localStorage.getItem('token'),
             'Content-Type': 'application/json'
           }
         })
         .then(response => {
-          setTools(response.data)
+            setComputers(response.data)
         })
         .catch(error => {
             console.log("Error", error);
         });
       }
-      
-      fetchData();
-      
-        
-    }, [tools])
+      fetchData();        
+    }, [computers])
 
-    const dataSoftware = tools.filter(row => row.Type == ToolType.software);
-    const dataHardware = tools.filter(row => row.Type == ToolType.hardware);
-    const deleteItemById = async({Tool_id})=>{
-        const result = await axios.delete(url_api+`/api/tool/${Tool_id}`,{
+    const deleteComputerById = async({Computer_id})=>{
+        const result = await axios.delete(url_api+`/api/computer/${Computer_id}`,{
                 headers: {
                   'x-access-token': localStorage.getItem('token'),
                   'Content-Type': 'application/json'
@@ -40,8 +35,8 @@ export const useItems = (type)=>{
         });
         return result;
     }
-    const editItemById = async(item)=>{
-        const result = await axios.put(url_api+`/api/tool/${item.Tool_id}`, item,{
+    const editComputerById = async(computer)=>{
+        const result = await axios.put(url_api+`/api/computer/${computer.Computer_id}`, {Name:computer.Name},{
             headers: {
               'x-access-token': localStorage.getItem('token'),
               'Content-Type': 'application/json'
@@ -53,9 +48,8 @@ export const useItems = (type)=>{
         });
         return result;
     }
-    const createItem = async(item)=>{
-      
-      const result = await axios.post(url_api+`/api/tool`, item,{
+    const createComputer = async(computer)=>{
+      const result = await axios.post(url_api+`/api/computer`, {Name:computer.Name},{
           headers: {
             'x-access-token': localStorage.getItem('token'),
             'Content-Type': 'application/json'
@@ -68,5 +62,5 @@ export const useItems = (type)=>{
       return result;
     }
   
-    return {tools, dataSoftware, dataHardware, deleteItemById, editItemById, createItem}
+    return {computers, deleteComputerById, editComputerById, createComputer}
 }

@@ -38,15 +38,13 @@ class NavContent extends Component {
             this.setState({ scrollWidth: scrollWidth, prevDisable: false })
         }
     }
-
+    
     render() {
-        const navItems = this.props.navigation.map(item => {
-            switch (item.type) {
-                case 'group':
-                    return <NavGroup layout={this.props.layout} key={item.id} group={item} />
-                default:
-                    return false
-            }
+        const rol = localStorage.getItem('rol');
+        const navItems = this.props.navigation.slice(0, rol).map(item => {
+            console.log(rol);
+            return <NavGroup layout={this.props.layout} key={item.id} group={item} />
+               
         })
 
         let mainContent = ''

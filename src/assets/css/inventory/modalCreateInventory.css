@@ -1,0 +1,87 @@
+.container-row-computer-inventory{
+    margin-top: 8%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-right: none;
+}
+.container-row-tools-inventory{
+    margin-top: 4%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-right: none;
+}
+.container-row-computer-inventory, .container-row-tools-inventory h4{
+    margin-top: 1%;
+    margin-right: none !important;
+    font-size: 120%;
+}
+.css-1hb7zxy-IndicatorsContainer span{
+    background-color: transparent !important;
+}
+.name-first-fild-inventory, .name-second-fild-inventory{
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+}
+.name-second-fild-inventory{
+    padding-left: 4%;
+}
+.basic-multi-select-inventory{
+    width: 30%;
+    padding-left: 3%;
+}
+.css-t3ipsp-control{
+    border-color: white !important ;
+    box-shadow: 0 0 0 1px #ffffff !important;
+}
+.css-t3ipsp-control:hover{
+    border-color: transparent !important ;
+    box-shadow: gray !important;
+}
+.basic-multi-select-inventory-multi{
+    width: 30%;
+    padding-left: 3%;
+    /* font-size: 100%; */
+}
+.css-13cymwt-control{
+    border-color: transparent !important ;
+    box-shadow:transparent !important;
+}
+.css-t3ipsp-control{
+    box-shadow:transparent !important;
+    border-color: transparent !important;
+}
+.css-b62m3t-container{
+    border-color: gray;
+}
+.css-13cymwt-control:active{
+    box-shadow:transparent !important;
+    border-color: transparent !important;
+}
+.css-13cymwt-control:focus{
+    box-shadow:transparent !important;
+    border-color: transparent !important;
+}
+.modalContainer-inventory{
+    text-align: center;
+    width: 32%;
+    height: 250px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
+    display: table !important;
+    flex-direction: column;
+    padding: 10px;
+}
+.modalContainer-inventory .bt-close{
+    color: #000000;
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    width: 20px;
+}
+.body-add-edit hr{
+    width: 30%;
+    margin-left: 37%;
+}

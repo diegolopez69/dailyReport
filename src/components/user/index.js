@@ -4,21 +4,13 @@ import AddUser from "./AddUser"
 import "../../assets/css/user.css"
 import { getUsers } from "../../data/user/getUsers"
 import SearchIcon from '@mui/icons-material/Search';
+import { useUser } from "../../hooks/user/useUser"
 
 const User =()=>{
-    const [dataUser, setDataUser] = useState([])
+    const {usersGeneral} = useUser();
     const[autoRefesh, setAutoRefresh] = useState(true)
     const [dataToSearch, setDataToSearch] = useState(""); 
-    useEffect(()=>{
-        
-        getUsers()
-        .then(response => setDataUser(response))
-        .catch(error => console(error))
-    }, [dataUser])
-    const dataExample = {
-        username :"Billy",
-        email:"billy@xd.com"
-    }
+
   
     return (
         <div>
@@ -27,7 +19,7 @@ const User =()=>{
                 <button><SearchIcon className="icon-search"/></button>
             </div> 
             <AddUser/>
-            <div className="container-cards-userprofiles">
+            {/* <div className="container-cards-userprofiles">
                 <Card key={1} data={dataExample}/>
                 <Card key={1} data={dataExample}/>
                 <Card key={1} data={dataExample}/>
@@ -35,12 +27,12 @@ const User =()=>{
                 <Card key={1} data={dataExample}/>
                 <Card key={1} data={dataExample}/>
                 
-            </div>                   
-            {/* <div className="col-12 row"> 
-                {dataUser.length === 0? "..error al cargar los datos": dataUser.filter(x => x.username.includes(dataToSearch) || x.email.includes(dataToSearch)).map((element)=>{
+            </div>                    */}
+            <div className="col-12 row"> 
+                {usersGeneral.length === 0? "..error al cargar los datos": usersGeneral.filter(x => x.username.includes(dataToSearch) || x.email.includes(dataToSearch)).map((element)=>{
                     return( <Card key={element.id} data={element}/>)
                 }) } 
-            </div>                       */}
+            </div>                      
         </div>
     )
 }

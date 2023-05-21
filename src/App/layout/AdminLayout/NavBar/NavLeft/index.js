@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import windowSize from 'react-window-size'
-
+import DropdownItem from 'react-bootstrap/esm/DropdownItem'
+import { Dropdown } from 'react-bootstrap'
 import Aux from '../../../../../hooks/_Aux'
 import * as actionTypes from '../../../../../store/actions'
 
@@ -22,22 +23,6 @@ class NavLeft extends Component {
                             <i className={iconFullScreen.join(' ')} />
                         </a>
                     </li>
-                    {/* <li className={navItemClass.join(' ')}>
-                        <Dropdown alignRight={dropdownRightAlign}>
-                            <Dropdown.Toggle variant={'link'} id="dropdown-basic">
-                                Dropdown
-                            </Dropdown.Toggle>
-                            <ul>
-                                <Dropdown.Menu>
-                                    <li><a className="dropdown-item" href={DEMO.BLANK_LINK}>Action</a></li>
-                                    <li><a className="dropdown-item" href={DEMO.BLANK_LINK}>Another action</a></li>
-                                    <li><a className="dropdown-item" href={DEMO.BLANK_LINK}>Something else here</a></li>
-                                </Dropdown.Menu>
-                            </ul>
-                        </Dropdown>
-                    </li>
-                    <li className="nav-item"><NavSearch/></li> */}
-                    {/* <li className='nav-item'>Genffersson Caal</li> | */}
                     <li className='nav-item'>
                         <div className='b-brand'>
                             <b>

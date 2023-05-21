@@ -12,20 +12,20 @@ export const useActions = ({ data, setData, apiAccess }) => {
         
         await postLogin({ apiAccess, data })
         .then(response => {
-           
+            console.log(data);
             if (response) {
-                const { user, token, redirect, equipo } = response
-                    localStorage.setItem('user', data.username)
-                    localStorage.setItem('team', 'EXAMPLE')
+                const { username, token, email, equipo, roles } = response
+
+                    console.log(roles.length);
+                    localStorage.setItem('user',username)
+                    localStorage.setItem('email', email)
+                    localStorage.setItem('rol', roles.length)
+                    localStorage.setItem('team', "equipo")
                     localStorage.setItem('token', response.accessToken)
-                    window.location.href = '/reports'
+                    window.location.href = '/revision'
                 }
             })
             .catch(error => {
-                localStorage.setItem('user','ROOT')
-                localStorage.setItem('team', 'EXAMPLE')
-                localStorage.setItem('token', 'holas')
-                window.location.href = '/reports'
                 if (error) {
                     setResponseLogin(error.data)
                 } else {

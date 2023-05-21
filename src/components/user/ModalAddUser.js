@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../assets/css/modalAddUser.css"
 import { postUser } from "../../data/user/postUser";
 import check from "../../assets/images/check.png"
+import { useUser } from "../../hooks/user/useUser";
 const ModalAddUser =({ openModal })=>{
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("")
@@ -10,20 +11,15 @@ const ModalAddUser =({ openModal })=>{
 
     const [ textResult, setTextResult] = useState("");
     const [textError, setTextError] = useState("");
-
-    const createUser = ()=>{
+    const {createUser} = useUser();
+    const handlerCreateUser = ()=>{
         const data = {            
             username: username,
             email: email,
             password:password,
-            rol:rol === "null" ? ["user"]: [rol]
+            roles:rol === "admin" ? ["user", "moderator", "admin"]: (rol == "moderator"?  ["user", "moderator"]:["user"] )
         }
-        postUser( data ).then((resolve)=>{
-            resetStates()
-            setTextResult("Usuario Creado")
-        }).catch(()=>{
-            setTextError("Error, intentelo mas tarde")
-        })
+        createUser(data);
     }
 
     const resetStates =()=>{
@@ -58,8 +54,8 @@ const ModalAddUser =({ openModal })=>{
                     <div className="container-row-rol">
                         <h4>Rol:</h4>
                         <select defaultValue={rol} name="Roles" value={rol} placeholder="Rol" onChange={( e )=> setRol(e.target.value)} className="select-edit" required>
-                            <option selected>Seleccione un rol</option>
-                            <option value="user" >Usuario</option>
+                            <option  disabled>Seleccione un rol</option>
+                            <option value="user" selected>Usuario</option>
                             <option value="moderator">Moderador</option>
                             <option value="admin">Administrador</option> 
                         </select>                     
@@ -68,7 +64,7 @@ const ModalAddUser =({ openModal })=>{
                 </div>
                 <div className="footer-add">
                     <button className="bt-cancel-add" onClick={()=> openModal(false)}>Cancelar</button>
-                    <button className="bt-add" onClick={createUser} type="submit" >Añadir</button>
+                    <button className="bt-add" onClick={handlerCreateUser} type="submit" >Añadir</button>
                 </div>
             </div>
         </div>

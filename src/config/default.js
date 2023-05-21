@@ -1,5 +1,5 @@
 export default {
-    defaultPath: '/example',
+    defaultPath: '/login',
     homePath: '/login',
     basename: '/', // only at build time to set, like /datta-able
     layout: 'vertical', // vertical
