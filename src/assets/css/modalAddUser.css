@@ -1,6 +1,10 @@
 .modalBackground-add{
     width: 100vw;
     height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    top: 0;
+    left: 0;
     top: 0;
     left: 0;
     transition: all .5s;
@@ -17,59 +21,33 @@
     border-radius: 5px;
     background-color: white;
     box-shadow: rgba(0, 0, 0 , 0.35) 0px 5px 15px;
-    display: flex ;
+    display: table !important ;
     flex-direction: column;
     padding: 25px;
 }
-.bt-close-add{
-    background-color: transparent;
-    font-size: 20px;
-    border: none;
-    width: 20px;
+.container-control-user{
+    height: 350px;
+    display: 'flex';
+    flex-direction: 'column';
+     gap: '2px' 
 }
-.bt-add{
-    color: white;
-    margin: 10px;
-    width: 100px;
-    border-radius: 50px;
-    height: 30px;
-    text-align: center;
-    background-color: rgb(154, 204, 105);
+.container-control-user Box{
+    margin: 20px;
 }
-.bt-cancel-add{
-    margin: 10px;
-    width: 100px;
-    border-radius: 50px;
-    height: 30px;
-    text-align: center;
-    color: black;
+.icon-show-password:hover{
+    cursor: pointer !important;
 }
-.bt-add:hover{
-    background-color: rgb(109, 207, 11);
+.container-button-icon-sp{
+    justify-content: left !important;
+    padding: 0px 0px 0px 0px !important;
+    /* width: 10px; */
+    text-align: left !important;
+    /* background-color: transparent !important; */
 }
-.bt-cancel-add:hover{
-    background-color:darkgray;
+.fieldRequired-add-user{
+    color: tomato;
 }
-.container-row-name{
-    display: flex;
-    align-items: center;
-}
-.container-row-email{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-}
-.container-row-password{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-}
-.container-row-rol{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-}
-.body-add input{
+/* .body-add input{
     border-color: transparent;
     text-align: left;
     margin: 20px 0px 0px 0px;
@@ -96,7 +74,7 @@
 .body-add .hr-select-add{
     width: 30%;
     margin-bottom: 20px;
-}
+} */
 .footer-add{
     text-align: center;
 }

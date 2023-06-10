@@ -25,14 +25,15 @@ export const useActions = ({ data, setData, apiAccess }) => {
                     window.location.href = '/revision'
                 }
             })
-            .catch(error => {
-                if (error) {
-                    setResponseLogin(error.data)
-                } else {
-                    console.log('API ERROR: ', error)
-                    setResponseLogin({ status: false, message: 'No hay comunicación con los servidores.' })
-                }
-            })
+        .catch(error => {
+            if (error) {
+                console.log("eRROR", error);
+                setResponseLogin( {status: false, message: error.data.message })
+            } else {
+                console.log('API ERROR: ', error)
+                setResponseLogin({ status: false, message: 'No hay comunicación con los servidores.' })
+            }
+        })
     }
 
     const showPassword = () => {

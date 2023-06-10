@@ -25,17 +25,15 @@ export const useUser = ()=>{
     }, [users])
 
     const usersGeneral = users.filter(row => row.email != localStorage.getItem('email'));
-    const deleteUserById = async({Tool_id})=>{
-        const result = await axios.delete(url_api+`/api/user/${Tool_id}`,{
+    const deleteUserById = async(User_id)=>{
+        const result = await axios.delete(url_api+`/api/user/${User_id}`,{
                 headers: {
                   'x-access-token': localStorage.getItem('token'),
                   'Content-Type': 'application/json'
                 }
               })
-        .then(response => response.data.status)
-        .catch(error => {
-            console.log("Error", error);
-        });
+        .then(response =>response.status)
+        .catch(error =>  error);
         return result;
     }
     const editUserById = async(user)=>{
@@ -59,10 +57,9 @@ export const useUser = ()=>{
             'Content-Type': 'application/json'
           }
         })
-      .then(response => response.data.status)
-      .catch(error => {
-          console.log("Error", error);
-      });
+      .then(response => response.status)
+      .catch(error =>  error.message);
+
       return result;
     }
   

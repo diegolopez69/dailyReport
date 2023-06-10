@@ -26,7 +26,7 @@ const Breadcrumb = props => {
                 <div className='page-block'>
                     <div className='row align-items-center'>
                         <div className='page-header-title ml-3'>
-                            <h4 className='mb-4 strong text-muted'>{title}</h4>
+                            {/* <h4 className='mb-4 strong text-muted'>{title}</h4> */}
                         </div>
                     </div>
                 </div>

@@ -65,3 +65,12 @@
     grid-template-columns: 1fr;
 }
 }
+.container-cards-users{
+    background-color: white;
+    margin-top: 50px;
+}
+.container-control-user-principal{
+    display: flex;
+    justify-content: right;
+    height: 100px;
+}

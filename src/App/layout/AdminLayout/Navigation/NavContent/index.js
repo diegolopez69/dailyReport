@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import windowSize from 'react-window-size'
+import '../../../../../assets/css/navbar/navbarContent.css'
 
 import Aux from '../../../../../hooks/_Aux'
 import NavGroup from './NavGroup'

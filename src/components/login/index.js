@@ -21,6 +21,7 @@ const Login = () => {
                     backgroundImage: `url(${background})`,
                 }}
             >
+                {console.log(message)}
                 <form className='needs-validation' onSubmit={tryLogin}>
                     <div className='auth-content'>
                         <div className='card '>

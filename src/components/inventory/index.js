@@ -6,9 +6,17 @@ import '../../assets/css/inventory/index.css'
 import { floors } from './default-data';
 import {useClassrooms} from '../../hooks/classrooms/useClassrooms' 
 import ClassroomsContainer from './ClassroomsContainer';
+
 const InventoryGeneral = () => {
   const {classrooms} = useClassrooms();
+  
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(0);
+
+  
   return (
+        
+      //parte inicial
       <Accordion defaultActiveKey="0">
       {
         

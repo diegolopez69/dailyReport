@@ -38,19 +38,19 @@ export const useInventory = (classroom)=>{
         });
         return result;
     }
-    // const editInventoryById = async(item)=>{
-    //     const result = await axios.put(url_api+`/api/tool/${item.Tool_id}`, item,{
-    //         headers: {
-    //           'x-access-token': localStorage.getItem('token'),
-    //           'Content-Type': 'application/json'
-    //         }
-    //       })
-    //     .then(response => response.data.status)
-    //     .catch(error => {
-    //         console.log("Error", error);
-    //     });
-    //     return result;
-    // }
+    const getInventoryById = async(id)=>{
+        const result = await axios.get(url_api+`/api/tool/${id}`,{
+            headers: {
+              'x-access-token': localStorage.getItem('token'),
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(response => response.data.status)
+        .catch(error => {
+            console.log("Error", error);
+        });
+        return result;
+    }
     const createInventory = async(classroom, computer, tools)=>{
       // console.log();
       tools.map(async(element)=>{

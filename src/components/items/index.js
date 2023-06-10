@@ -1,5 +1,4 @@
 import React, {useState, useCallback, useRef} from 'react'
-import { Row, Col, Tabs, Tab } from 'react-bootstrap'
 import "../../assets/css/items/index.css"
 import Aux from '../../hooks/_Aux'
 import { useItems } from '../../hooks/items'
@@ -17,14 +16,27 @@ import TablePagination from '@mui/material/TablePagination';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModalDeleteItem from './ModalDeleteItem'
 import { TableFooter } from '@mui/material';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import TabPanel from '@mui/lab/TabPanel';
+import AddIcon from '@mui/icons-material/Add';
 import ModalCreateEditItem from './ModalCreateEditItem'
 const Items = props => {
     const gridRef = useRef();
-    const { dataSoftware, dataHardware } = useItems();    
+    
+    const [openOkResponse, setOkResponse] =useState(false);
+    const [openErrorResponse, setErrorResponse] =useState(false);
+    const { dataSoftware, dataHardware, deleteItemById} = useItems();    
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [openModalCreateEdit, setOpenModalCreateEdit ]= useState(false);
     const [currentItem, setCurrentItem] = useState({});
-
+    const [valueTab, setValueTab] = React.useState('1');
+    const [deleteItemOk, setDeleteItemOk] =useState(false);
+    const [deleteItemError, setDeleteItemError] = useState(false);
     const [pageSoftware, setPageSoftware] = useState(0);
     const [rowsPerPageSoftware, setRowsPerPageSoftware] = useState(5);
     const handleChangePageSoftware = (event, newPage) => {
@@ -44,8 +56,25 @@ const Items = props => {
         setRowsPerPageHardware(parseInt(event.target.value, 10));
         setPageHardware(0);
     };
+    const handleChangeTab = (value, newValue)=>{
+        setValueTab(newValue)
+    }
+    const handleCloseOk = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
 
+        setDeleteItemOk(false);
+        setOkResponse(false);
+    };
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
 
+        setErrorResponse(false);
+        setDeleteItemError(false)
+    };
     const editItem =( item )=>{
         setCurrentItem(item)
         setOpenModalCreateEdit(true)
@@ -54,122 +83,152 @@ const Items = props => {
         setCurrentItem({})
         setOpenModalCreateEdit(true)
     }
-    const deleteItem = (item)=>{
-        setCurrentItem(item)
-        setOpenModalDelete(true)
+    const deleteItem = async(item)=>{
+
+        const result = await deleteItemById(item);
+        console.log(result)
+        if(result ==200){
+            setDeleteItemOk(true)
+            setOkResponse(true)
+        }else{            
+            setDeleteItemError(true)
+            setErrorResponse(true)
+        }
     }
     return (
         <>
-        <Aux>
-            <Row>
-                <Col>
-                    <h5>Inventory</h5>
-                    <hr />
-                    <div className='header-container-inventory'>
-                        <button className='bt-add-modal' onClick={()=>  createItem()}>Nueva Herramienta</button>
-                    </div>
-                    <Tabs variant='pills' defaultActiveKey='hardware' className='mb-3'>
-                        <Tab eventKey='hardware' title='Hardware'>
-                            <TableContainer component={Paper}>
-                                <Table sx={{ minWidth: 150, maxWidth: 900}} aria-label="simple table" align="center">
-                                    <TableHead>
-                                    <TableRow>
-                                        <TableCell width="70px" height="80px">Nº</TableCell>
-                                        <TableCell width="100px" height="80px"  align="center">Tipo</TableCell>
-                                        <TableCell width="100px" height="80px"  align="center">Nombre</TableCell>
-                                        <TableCell width="100px" height="80px"  align="center">Acciones</TableCell>
-                                    </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                    {dataHardware.map((row, index) => (
-                                        <TableRow
-                                        key={index}
-                                        >
-                                        <TableCell>
-                                            {row.Tool_id}
-                                        </TableCell>
-                                        <TableCell align="center">{row.Type}</TableCell>
-                                        <TableCell align="center">{row.Name}</TableCell>
+      <div className='div-container-title-addbt'>
+        <h5 className='tittle-page'>Inventario</h5>
+        <button className='bt-add-default' onClick={createItem}><AddIcon className='icon-add-default'/> NUEVA</button>
+      </div>
+      <div className='body-inventory'>
+        <div className='tables-type-inventory-body'>
+            <Box sx={{ width: '100%', typography: 'body1' }}>
+            <TabContext value={valueTab}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <TabList onChange={handleChangeTab} aria-label="lab API tabs example">
+                    <Tab label="Hardware" value="1" />
+                    <Tab label="Software" value="2" />
+                </TabList>
+                </Box>                
+                <div className='container-table-hardware'>
+                <TabPanel value="1">
+                        <TableContainer component={Paper} sx={{ minWidth: 150, align:"center"}} >
+                            <Table sx={{ }} aria-label="simple table" align="center">
+                                <TableHead>
+                                <TableRow style={{ backgroundColor: '#eeeeee', height:'20px'}}>
+                                    <TableCell width="10px" style={{fontFamily:'Open Sans', fontSize:'16px'}} >Nº</TableCell>
+                                    <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Nombre</TableCell>
+                                    <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Tipo</TableCell>
+                                    <TableCell width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Acciones</TableCell>
+                                </TableRow>
+                                </TableHead>
+
+                                <TableBody>
+                                {dataHardware.length == 0 ?  ""
+                                :    
+                                (rowsPerPageHardware > 0
+                                    ? dataHardware.slice(pageHardware * rowsPerPageHardware, pageHardware * rowsPerPageHardware + rowsPerPageHardware)
+                                    : dataHardware)
+                                    .map((row, index) => {
+                                    return(
+                                    <TableRow key={index} style={{height:'20px'}}>  
+                                        <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{index}</TableCell>
+                                        <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Name}</TableCell>
+                                        <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Type}</TableCell>
                                         <TableCell align="center"><EditIcon className='icon-edit'  onClick={()=>editItem(row)}/><DeleteIcon className='icon-delete' onClick={()=>deleteItem(row)}/></TableCell>
-                                        
-                                        </TableRow>
-                                    ))}
-                                    </TableBody>
-                                    <TableFooter >
-                                        <TableRow >  
-                                        <TablePagination
-                                        rowsPerPageOptions={[5, 10, 25, 100]}
-                                        count={dataHardware.length}
-                                        rowsPerPage={rowsPerPageHardware}
-                                        page={pageHardware}
-                                        onPageChange={handleChangePageHardware}
-                                        onRowsPerPageChange={handleChangeRowsPerPageHardware}
-                                        labelRowsPerPage='Fila por pagina'
-                                        labelDisplayedRows={({ from, to, count }) => `Mostrando ${from} al ${to} de ${count} elementos`}
-                                        style={{ justifyContent: 'center'}}
-                                        />
-                                        </TableRow>
-                                    </TableFooter> 
-                                </Table>
-
-                            </TableContainer>
-                                                     
-                        </Tab>
-                        <Tab eventKey='software' title='Software'>
-                        <TableContainer component={Paper}>
-                                <Table sx={{ minWidth: 150, maxWidth: 900}} aria-label="simple table" align="center">
-                                    <TableHead>
-                                    <TableRow>
-                                        <TableCell width="70px" height="80px">Nº</TableCell>
-                                        <TableCell  width="100px" height="80px"  align="center">Tipo</TableCell>
-                                        <TableCell width="100px" align="center">Nombre</TableCell>
-                                        <TableCell width="100px" align="center">Acciones</TableCell>
                                     </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                    {dataSoftware.map((row, index) => (
-                                        <TableRow
-                                        key={index}
-                                        >
-                                        <TableCell align='left'>
-                                            {row.Tool_id}
-                                        </TableCell>
-                                        <TableCell align="center">{row.Type}</TableCell>
-                                        <TableCell align="center">{row.Name}</TableCell>
+                                    )
+                                }
+                                )
+                                }
+                                </TableBody> 
+                                <TableFooter >
+                                    <TableRow >  
+                                    <TablePagination
+                                    rowsPerPageOptions={[5, 10]}
+                                    count={0}
+                                    rowsPerPage={rowsPerPageHardware}
+                                    page={pageHardware}
+                                    onPageChange={handleChangePageHardware}
+                                    onRowsPerPageChange={handleChangeRowsPerPageHardware}
+                                    labelRowsPerPage='Fila por páginas'
+                                    labelDisplayedRows={({ from, to, count }) => `${from} - ${to} de ${count}`}
+                                    style={{ justifyContent: 'center'}}
+                                    />
+                                    </TableRow>
+                                </TableFooter>            
+                            </Table>          
+                        </TableContainer> 
+                </TabPanel>
+                </div>
+                <div className='container-table-software'>
+                <TabPanel value="2">
+                        <TableContainer component={Paper} sx={{ minWidth: 150, align:"center"}} >
+                            <Table sx={{ }} aria-label="simple table" align="center">
+                                <TableHead>
+                                <TableRow style={{ backgroundColor: '#eeeeee', height:'20px'}}>
+                                    <TableCell width="10px" style={{fontFamily:'Open Sans', fontSize:'16px'}} >Nº</TableCell>
+                                    <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Nombre</TableCell>
+                                    <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Tipo</TableCell>
+                                    <TableCell width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Acciones</TableCell>
+                                </TableRow>
+                                </TableHead>
+
+                                <TableBody>
+                                {dataSoftware.length == 0 ?  <TableCell align="center"></TableCell>
+                                :    
+                                (rowsPerPageSoftware > 0
+                                    ? dataSoftware.slice(pageSoftware * rowsPerPageSoftware, pageSoftware * rowsPerPageSoftware + rowsPerPageSoftware)
+                                    : dataSoftware)
+                                    .map((row, index) => {
+                                    return(
+                                    <TableRow key={index} style={{height:'20px'}}>  
+                                        <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{index}</TableCell>
+                                        <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Name}</TableCell>
+                                        <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Type}</TableCell>
                                         <TableCell align="center"><EditIcon className='icon-edit'  onClick={()=>editItem(row)}/><DeleteIcon className='icon-delete' onClick={()=>deleteItem(row)}/></TableCell>
-                                        
-                                        </TableRow>
-                                    ))}
-                                    </TableBody>
-                                    <TableFooter >
-                                        <TableRow >  
-                                        <TablePagination
-                                        rowsPerPageOptions={[5, 10, 25, 100]}
-                                        count={dataSoftware.length}
-                                        rowsPerPage={rowsPerPageSoftware}
-                                        page={pageSoftware}
-                                        onPageChange={handleChangePageSoftware}
-                                        onRowsPerPageChange={handleChangeRowsPerPageSoftware}
-                                        labelRowsPerPage='Fila por pagina'
-                                        labelDisplayedRows={({ from, to, count }) => `Mostrando ${from} al ${to} de ${count} elementos`}
-                                        style={{ justifyContent: 'center'}}
-                                        />
-                                        </TableRow>
-                                    </TableFooter> 
-                                </Table>
-
-                            </TableContainer>
-                        </Tab>
-                    </Tabs>
-                </Col>
-            </Row>
-        </Aux>
-        
-        {/* modals */}
-        {openModalDelete && <ModalDeleteItem openModal={setOpenModalDelete} item={currentItem}/>}
-        {openModalCreateEdit && <ModalCreateEditItem openModal={setOpenModalCreateEdit} item={ Object.keys(currentItem).length === 0 ? null: currentItem}/>}
-
-        </>
+                                    </TableRow>
+                                    )
+                                }
+                                )
+                                }
+                                </TableBody> 
+                                <TableFooter >
+                                    <TableRow >  
+                                    <TablePagination
+                                    rowsPerPageOptions={[5, 10]}
+                                    count={0}
+                                    rowsPerPage={rowsPerPageSoftware}
+                                    page={pageSoftware}
+                                    onPageChange={handleChangePageSoftware}
+                                    onRowsPerPageChange={handleChangeRowsPerPageSoftware}
+                                    labelRowsPerPage='Fila por páginas'
+                                    labelDisplayedRows={({ from, to, count }) => `${from} - ${to} de ${count}`}
+                                    style={{ justifyContent: 'center'}}
+                                    />
+                                    </TableRow>
+                                </TableFooter>            
+                            </Table>          
+                        </TableContainer> 
+                </TabPanel>
+                </div>
+            </TabContext>
+            </Box>
+        </div>
+      </div>
+    {openModalCreateEdit && <ModalCreateEditItem openModal={setOpenModalCreateEdit} item={ Object.keys(currentItem).length === 0 ? null: currentItem} responseOk={setOkResponse} responseError={setErrorResponse}/>}
+    <Snackbar open={openOkResponse} autoHideDuration={2000} onClose={handleCloseOk}>
+        <MuiAlert onClose={handleCloseOk} severity="success" sx={{ width: '100%' }}>
+            {deleteItemOk? "Se eliminó correctamente": "Se guardó correctamente!!"}
+        </MuiAlert>
+    </Snackbar>
+    <Snackbar open={openErrorResponse} autoHideDuration={2000} onClose={handleCloseError}>
+        <MuiAlert onClose={handleCloseError} severity="error" sx={{ width: '100%' }}>
+            {deleteItemError? "Error al eliminar el item, inténtalo más tarde": "Error al guardar el Ítem, inténtalo más tarde"}
+        </MuiAlert>
+    </Snackbar>
+    </>
         
 
     )

@@ -1,0 +1,24 @@
+.body-revision{
+    margin-top: 2%;
+}
+.container-control-revision{
+    display: flex;
+    width: 100% !important;
+    text-align: right;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin-bottom: 2%;
+    justify-content: right;
+}
+.body-revision{
+    background-color: white;
+    padding: 20px;
+}
+.text-to-referenceControl{
+    margin-top: 10px;
+    color: gray;
+}
+.container-control-revision button{
+    margin-left: 20px;
+}

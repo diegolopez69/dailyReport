@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, SyntheticEvent, Event} from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,9 +10,27 @@ import { TableFooter, TablePagination } from '@mui/material';
 import { useInventory } from '../../hooks/inventory/useInventory';
 import Checkbox from '@mui/material/Checkbox';
 import { useRevision } from '../../hooks/revision/useRevision';
-
-const ModalAddRevision =({openModal, classroom})=> {
-   
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import Switch from '@mui/material/Switch';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useClassrooms } from '../../hooks/classrooms/useClassrooms';
+import { floors } from './default-data';
+import InputAdornment from '@mui/material/InputAdornment';
+import Alert from '@mui/material/Alert';
+import moment from 'moment';
+import '../../assets/css/revision/modalCreateRevision.css';
+import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
+const ModalAddRevision =({openModal})=> {
+    const now = moment();
+    const {classrooms} = useClassrooms();    
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const { createRevision } = useRevision();
@@ -20,15 +38,42 @@ const ModalAddRevision =({openModal, classroom})=> {
     const {inventory} =useInventory();
     const [dataRevision, setDataRevision] = useState([]);
     const previousInventoryRef = useRef([]);
+    const [openOkResponse, setOkResponse] =useState(false);
+    const [openErrorResponse, setErrorResponse] =useState(false);
+    const [warningSaveRevision, setWarningSaveRevision] = useState(-1);
+    //control useStates
+    const [floorControl, setFloorControl] = useState('');
+    const [classroomControl, setClassroomControl] = useState('');
+    const [weekControl, setWeekControl] =useState(null);
+
+    const handleClickOkAlert= () => {
+        setOkResponse(true);
+    };
+    const handleClickErrorAlert = () => {
+        setErrorResponse(true);
+    };
+    const AlertResponse = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setErrorResponse(false);
+        setOkResponse(false);
+    };
 
     useEffect(() => {
         if (inventory.length > 0 && !arraysAreEqual(inventory, previousInventoryRef.current)) {
         const revisedData = inventory.map((element) => ({
             Comments: "",
             there_is: 0,
-            works: 0,
+            Works: 0,
             Actual_amount: null,
             Inventory_id: element.Inventory_id,
+            Classroom_id:element.Classroom_id,
             Computer_name: element.computer.Name,
             Tool_name: element.tb_tool.Name,
             Tool_type: element.tb_tool.Type
@@ -52,8 +97,8 @@ const ModalAddRevision =({openModal, classroom})=> {
                     }else{
                         return {
                             ...row,
-                            works: 0,
-                            there_is: null,
+                            Works: 0,
+                            there_is: 0,
                             Comments:"",
                             Actual_amount:0
                           };
@@ -61,7 +106,7 @@ const ModalAddRevision =({openModal, classroom})=> {
                 }else{
                     return {
                         ...row,
-                        works: isChecked == true? 1:0
+                        Works: isChecked == true? 1:0
                       };
                 }    
           }
@@ -98,9 +143,39 @@ const ModalAddRevision =({openModal, classroom})=> {
         });
         setDataRevision(updatedRows)
     };
-    const handlerSaveRevision = ()=>{
-        const result = createRevision(dataRevision);
-        console.log(result);
+    const handlerSaveRevision = async()=>{
+        // setWarningSaveRevision
+        if(dataRevision.filter((dataRow)=> dataRow.Classroom_id == (classroomControl != ''? classroomControl: null)).length == 0){
+            setWarningSaveRevision(1)
+            setTimeout(() => {
+                setWarningSaveRevision(-1)
+              }, 3000);
+        }else if(classroomControl == '' || floorControl == ''){
+            setWarningSaveRevision(0)
+            setTimeout(() => {
+                setWarningSaveRevision(-1)
+              }, 3000);
+        }else{
+            const result = await createRevision(dataRevision);
+            if(result[result.length-1] == 201){
+                setOkResponse(true)
+                setTimeout(() => {
+                    setOkResponse(false)
+                }, 3000);
+            }else{
+                setErrorResponse(true)
+                setTimeout(() => {
+                    setErrorResponse(false)
+                }, 3000);
+            }
+        }
+
+        
+        // openModal(false)x
+    }
+    const handleClearControl = ()=>{
+        setClassroomControl('')
+        setFloorControl('')
     }
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -111,85 +186,149 @@ const ModalAddRevision =({openModal, classroom})=> {
     };
   return (
     <>
-        <div className="modalBackground-inventory-especific">
+        <div className="modalBackground-revision-especific">
             <div className="modalContainer-inventory-especific">
-                <div className="header-modal">
-                    <button className="bt-close" onClick={()=> openModal(false)}>X</button>
-                </div>
-                <div className='tittle-header-modal-inventory'>
-                    <h5>Aula: {classroom.Floor}.{classroom.Number}</h5>
-                    <hr></hr>
+                <div className='tittle-header-modal-revision'>
+                    <h5>Reporte</h5>
+                    <br></br>
                 </div>
                 <div className='container-header-bt-add'>
                 </div>                
-                <div className="body-add-edit">
-                    <TableContainer component={Paper} sx={{ minWidth: 150, align:"center"}} >
-                        <Table sx={{ minWidth: 150, maxWidth: 1000}} aria-label="simple table" align="center">
-                            <TableHead >
-                            <TableRow>
-                                <TableCell width="70px" height="80px"> Existe</TableCell>
-                                <TableCell width="70px" height="80px"> Funciona</TableCell>
-                                <TableCell width="70px" height="80px"> Comentario</TableCell>
-                                <TableCell width="70px" height="80px"> Cantidad</TableCell>
-                                <TableCell width="100px" align="center">Ordenador</TableCell>
-                                <TableCell  width="100px" align="center">Ítem</TableCell>
-                                <TableCell  width="100px" align="center">Tipo</TableCell>
-                            </TableRow>
-                            </TableHead>
+                <div className="body-add-edit-revision">
+                <div className='container-control-revision'>
+                    <Box sx={{ minWidth: 330, maxWidth: 330, marginRight:3 }}>
+                    <FormControl fullWidth > 
+                        <InputLabel id="demo-simple-select-label">Planta</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={floorControl}
+                        label="Age"
+                        onChange={ (event)=> setFloorControl(event.target.value )}
+                        >
+                        {floors.map((element, index)=>{
+                            return <MenuItem value={index}>{element}</MenuItem>
+                            })
+                            
+                        }
+                        </Select>
+                    </FormControl>
+                    </Box>
+                    <Box sx={{ minWidth: 330, maxWidth: 330, marginRight:3}}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Aula</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={classroomControl}
+                        label="Age"
 
-                            <TableBody>
-                            {dataRevision.length == 0 ?  <TableCell align="center">Cargando..</TableCell>
-                            :    
-                            (rowsPerPage > 0
-                                ? dataRevision.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                : dataRevision)
-                                .map((row, index) => (
-                                <TableRow
-                                key={index}
-                                >
-                                <TableCell>
-                                    <Checkbox {...label} width="70px" color="success" onChange={(event)=>handleCheckboxClick(event, row.Inventory_id, 1)}/>
-                                </TableCell>
-                                <TableCell>
-                                    <Checkbox checked={row.works === 1? true:false} {...label} color="success" disabled={row.there_is == 0 ? true:false}  onChange={(event)=>handleCheckboxClick(event, row.Inventory_id)}/>
-                                </TableCell>
-                                <TableCell>
-                                    <input type='text' value={row.Comments} placeholder='comentarios' disabled={row.there_is == 0 ? true:false} onChange={(event)=> handleCommentsClick(event, row.Inventory_id)}></input>
-                                </TableCell>
-                                <TableCell>
-                                    <input type='number' value={row.Actual_amount} placeholder='cantidad' disabled={row.there_is == 0 ? true:false} onChange={(event)=> handleCurrentAmountClick(event, row.Inventory_id)} ></input>
-                                </TableCell>
-                                <TableCell align="center">{row.Computer_name}</TableCell>
-                                <TableCell align="center">{row.Tool_name}</TableCell>
-                                <TableCell align="center">{row.Tool_type}</TableCell>                                
+                        onChange={ (event)=> setClassroomControl(event.target.value )}
+                        >
+                        {classrooms.filter((row)=> (floorControl == ''? row: floors[floorControl] == row.Floor )).map((element, index)=>{
+                            return <MenuItem value={element.Classroom_id}>{element.Floor}.{element.Number}</MenuItem>
+                            })
+                            
+                        }
+                        </Select>
+                    </FormControl>
+                    </Box>
+                    <Box sx={{ minWidth: 360, maxWidth: 330}} className='input-revision-especific'>
+                    <TextField 
+                        sx={{ minWidth:330, textAlign:'left', maxHeight:10}}
+                            InputProps={{
+                            endAdornment: <InputAdornment 
+                                ><CalendarMonthIcon/></InputAdornment>,
+                            }}
+                            id="outlined-required"
+                            label="Semana"
+                            type='number'
+                            disabled
+                            defaultValue={now.week()}
+                        />
+                    </Box>
+                    <button className='bt-add-default' onClick={handleClearControl}>LIMPIAR</button>
+                </div>
+                <div className='table-body-new-revision'>
+                <TableContainer component={Paper} sx={{ minWidth: 150, align:"center"}} >
+                    <Table sx={{ }} aria-label="simple table" align="center">
+                        <TableHead>
+                        <TableRow style={{ backgroundColor: '#eeeeee', height:'20px'}}>
+                            <TableCell width="10px" style={{fontFamily:'Open Sans', fontSize:'16px'}} > Localizado</TableCell>
+                            <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Ítem</TableCell>
+                            <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Tipo</TableCell>
+                            <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Ordenador</TableCell>
+                            <TableCell width="100px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Cantidad</TableCell>
+                            <TableCell  width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Operativo</TableCell>
+                        </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                        {dataRevision.length == 0 ?  <TableCell align="center">Cargando..</TableCell>
+                        :
+                        (classroomControl == '' || floorControl == '')?
+                            <>
+                            <h5 className='text-to-referenceControl'>  Seleciona la planta y el aula</h5>
+                            <WarningAmberRoundedIcon color="secondary"/>
+                            </>
+                        :
+                        (rowsPerPage > 0
+                            ? dataRevision.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            : dataRevision)
+                            .filter((dataRow)=> dataRow.Classroom_id == (classroomControl != ''? classroomControl: null)).map((row, index) => {
+                            return(
+                                
+                                <TableRow key={index} style={{height:'20px'}}>
+                                <TableCell style={{fontFamily:'Open Sans'}}>
+                                    <Checkbox {...label} width="70px" color="success" checked={row.there_is} onChange={(event)=>handleCheckboxClick(event, row.Inventory_id, 1)} />
+                                </TableCell>                 
+                                <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Tool_name}</TableCell>
+                                <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Tool_type}</TableCell>
+                                <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Computer_name}</TableCell>
+                                <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>1</TableCell>
+                                <TableCell align="center"><Switch checked={row.Works} onChange={(event)=>handleCheckboxClick(event, row.Inventory_id)} /></TableCell>                                
                                 </TableRow>
-                            ))
+                            )
                             }
-                            </TableBody> 
-                            <TableFooter >
-                                <TableRow >  
-                                <TablePagination
-                                rowsPerPageOptions={[5, 10]}
-                                count={0}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                                labelRowsPerPage='Fila por pagina'
-                                labelDisplayedRows={({ from, to, count }) => `Mostrando ${from} al ${to} de ${count} elementos`}
-                                style={{ justifyContent: 'center'}}
-                                />
-                                </TableRow>
-                            </TableFooter>            
-                        </Table>          
-                    </TableContainer>
+                        )
+                        }
+                        </TableBody> 
+                        <TableFooter >
+                            <TableRow >  
+                            <TablePagination
+                            rowsPerPageOptions={[5, 10]}
+                            count={0}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                            labelRowsPerPage='Fila por páginas'
+                            labelDisplayedRows={({ from, to, count }) => `${from} - ${to} de ${count}`}
+                            style={{ justifyContent: 'center'}}
+                            />
+                            </TableRow>
+                        </TableFooter>            
+                    </Table>          
+                </TableContainer>
+                </div>
                     <div className="footer">
-                        <button className="bt-cancel" onClick={()=> openModal(false)}>Cancelar</button>
-                        <button className="bt-edit" onClick={()=>handlerSaveRevision()} >Guardar</button>
+                        <button className="bt-close-modal-create" onClick={()=>openModal(false)}>CERRAR</button>
+                        <button className="bt-save-modal-create" onClick={handlerSaveRevision} >GUARDAR</button>
                     </div>
                 </div>
             </div>
         </div>
+        <Snackbar open={openOkResponse} autoHideDuration={1000} onClose={handleClose}>
+            <AlertResponse onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Se guardó correctamente!!
+            </AlertResponse>
+        </Snackbar>
+        <Snackbar open={openErrorResponse} autoHideDuration={1000} onClose={handleClose}>
+            <AlertResponse onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                Error al guardar la revisión, intenetelo mas tarde 
+            </AlertResponse>
+        </Snackbar>
+        {warningSaveRevision == 0 ? <Alert severity="error">Selecciona el aula y a planta !!</Alert>:warningSaveRevision==1? <Alert severity="error">No hay datos encontrados!</Alert>:""}
         {/* {openModalAddItems && <ModalCreateInventory openModal={setOpenModalAddItems} classroom={classroom}/>} */}
     </>
   )

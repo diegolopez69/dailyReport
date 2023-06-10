@@ -34,23 +34,19 @@ export const useItems = (type)=>{
                   'Content-Type': 'application/json'
                 }
               })
-        .then(response => response.data.status)
-        .catch(error => {
-            console.log("Error", error);
-        });
+        .then(response => response.status)
+        .catch(error => error);
         return result;
     }
     const editItemById = async(item)=>{
-        const result = await axios.put(url_api+`/api/tool/${item.Tool_id}`, item,{
+        const result = await axios.put(url_api+`/api/tool/${item.Tool_id}`, {Name: item.Name, Type: item.Type},{
             headers: {
               'x-access-token': localStorage.getItem('token'),
               'Content-Type': 'application/json'
             }
           })
-        .then(response => response.data.status)
-        .catch(error => {
-            console.log("Error", error);
-        });
+        .then(response => response.status)
+        .catch(error => console.log(error) );
         return result;
     }
     const createItem = async(item)=>{
@@ -61,10 +57,8 @@ export const useItems = (type)=>{
             'Content-Type': 'application/json'
           }
         })
-      .then(response => response.data.status)
-      .catch(error => {
-          console.log("Error", error);
-      });
+      .then(response => response.status)
+      .catch(error => error);
       return result;
     }
   

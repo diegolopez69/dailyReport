@@ -6,7 +6,7 @@ import NavRight from './NavRight'
 import Aux from '../../../../hooks/_Aux'
 import * as actionTypes from '../../../../store/actions'
 import logoKronos from '../../../../assets/images/logo_kronos.svg'
-
+import '../../../../assets/css/navbar/index.css'
 const NavBar = props => {
     let headerClass = ['navbar', 'pcoded-header', 'navbar-expand-lg', props.headerBackColor]
     if (props.headerFixedLayout) {
@@ -25,11 +25,7 @@ const NavBar = props => {
                     <a className={toggleClass.join(' ')} id='mobile-collapse1' href onClick={props.onToggleNavigation}>
                         <span />
                     </a>
-                    <a href className='b-brand'>
-                        {/* <div className='b-bg'>
-                            <i className='feather icon-clock' />
-                        </div> */}
-                        {/* <img className='logo-kronos' src={logoKronos} alt='Logo' /> */}
+                    <a href className='b-brand'>                        
                         <i className='feather icon-bar-chart-2 auth-icon' />
                         <span className='b-title'>{process.env.REACT_APP_APP_NAME}</span>
                     </a>

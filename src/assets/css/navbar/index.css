@@ -1,0 +1,7 @@
+.navbar-expand-lg .navbar-collapse{
+    background-color:#01579B !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}

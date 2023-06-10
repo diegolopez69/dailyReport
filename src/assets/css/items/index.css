@@ -1,3 +1,17 @@
 .header-container-inventory{
     text-align: right;
 }
+.container-table-hardware{
+    background-color: white;
+    padding-top: 1%;
+}
+
+.container-table-software{
+    background-color: white;
+}
+.body-inventory{
+    margin-top: 2%;
+}
+.title-item-modalCreate{
+    text-align: left;
+}

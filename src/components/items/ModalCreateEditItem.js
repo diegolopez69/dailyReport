@@ -1,45 +1,75 @@
 import React, { useState } from "react"
 import { useItems } from "../../hooks/items";
-const ModalCreateEditItem =({ openModal, item })=>{
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+const ModalCreateEditItem =({ openModal, item, responseOk, responseError })=>{
     
-    const [currentItem, setCurrentItem] = useState( item? item:{ Type:"", Name:""});
+    const [currentItem, setCurrentItem] = useState( item? item:{ Type:"Software", Name:""});
     const {editItemById, createItem}  = useItems();
     
     const handlerEditCreateCurrentItem = async( )=>{
         if(item){
-            editItemById(currentItem);
-            openModal(false);
+            const result = await editItemById(currentItem);
+            if(result == 200){
+                responseOk(true)
+                openModal(false);
+            }else{
+                responseError(true)
+            }
         }else{
-            console.log(currentItem)
-            console.log( await createItem(currentItem));
-            // openModal(false);
+            const result = await createItem(currentItem);
+            if(result == 201){
+                responseOk(true)
+                openModal(false);
+            }else{
+                responseError(true)
+            }
         }
     }
     
     return (
         <div className="modalBackground">
             <div className="modalContainer">
-                <div className="header-modal">
-                <button className="bt-close" onClick={()=> openModal(false)}>X</button>
+                <div className='tittle-header-modal-revision'>
+                    <h5 className="title-item-modalCreate">{item?  "Ítem":"Nuevo Ítem"} </h5>
+                    <br></br>
                 </div>
-                <div className="body-add-edit">
-                    <div className="container-row-name">
-                        <h4>Nombre:</h4>
-                        <input type="text" defaultValue={currentItem.Name} onChange={( e )=> setCurrentItem( {...currentItem, Name: e.target.value})} placeholder="Nombre" required></input>
-                    </div>
-                    <hr/>
-                    <div className="container-row-type">
-                        <h4>Tipo:</h4>
-                        <select defaultValue={ item? item.Type:"Init"} name="type" onChange={( e )=> setCurrentItem( {...currentItem, Type: e.target.value })}  placeholder="Tipo"  className="select-edit" required>
-                            <option selected = {item? false: true} disabled value="Init">Seleccione el tipo</option>
-                            <option selected = {item && item.Type == "Hardware" ? true: false} value="Hardware" >Hardware</option>
-                            <option selected = {item && item.Type == "Software" ? true: false}value="Software">Software</option>
-                        </select>  
-                    </div>
+                <div className="body-add-edit-item">
+                    <Box sx={{ minWidth: 460, maxWidth: 460, marginTop:2, marginBottom:7 }}>
+                        <FormControl fullWidth > 
+                            <TextField 
+                                sx={{ minWidth:460, maxWidth: 460, textAlign:'left', maxHeight:10}}
+                                    id="outlined-required"
+                                    type='text'
+                                    label="Nombre"
+                                    defaultValue={currentItem.Name}
+                                    onChange={(event)=>setCurrentItem({...currentItem, Name:event.target.value})}
+                            />                        
+                        </FormControl>
+                    </Box>
+                    <Box sx={{ minWidth: 460, maxWidth: 460, marginTop:2, marginBottom:7 }}>
+                    <FormControl fullWidth > 
+                    <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Tipo"
+                        defaultValue={currentItem.Type}
+                        onChange={ (event)=> setCurrentItem({...currentItem, Type:event.target.value} )}
+                        >
+                            <MenuItem value="Hardware">Hardware</MenuItem>                            
+                            <MenuItem value="Software">Software</MenuItem>
+                        </Select>                    
+                    </FormControl>
+                    </Box>
                 </div>
                 <div className="footer">
-                    <button className="bt-cancel" onClick={()=> openModal(false)}>Cancelar</button>
-                    <button className="bt-edit" onClick={handlerEditCreateCurrentItem}>Guardar</button>
+                    <button className="bt-close-modal-create" onClick={()=> openModal(false)}>CERRAR</button>
+                    <button className="bt-save-modal-create" onClick={handlerEditCreateCurrentItem}>GUARDAR</button>
                 </div>
             </div>
         </div>
