@@ -6,6 +6,16 @@
     display: grid;
     grid-template-columns: repeat(5, 2fr)!important;
 }
+.tables-type-computer-body{
+    background-color: white;
+    padding: 20px;
+}
+.body-computers{
+    margin-top: 40px;
+}
+.tittle-header-modal-computer{
+    text-align: left;
+}
 @media (max-width: 868px) {
     .container-cards-computer{
       grid-template-columns: repeat(2, 1fr)!important;
@@ -26,4 +36,8 @@
     .container-cards-computer{
         grid-template-columns: 1fr !important;
     }
+}
+.container-control-computer-principal{
+    display: flex;
+    justify-content: right;
 }

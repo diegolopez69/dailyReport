@@ -61,10 +61,6 @@ const User =()=>{
                 <h5 className='tittle-page'>Usuarios</h5>
                 <button className='bt-add-default' onClick={handleCreateUser}><AddIcon className='icon-add-default'/> NUEVA</button>
             </div>
-                    {/* <div className="search">
-                        <input onChange={(e)=> setDataToSearch(e.target.value) } type="text" placeholder="Buscar usuario"></input>
-                        <button><SearchIcon className="icon-search"/></button>
-                    </div> */}
                 <div className="container-cards-users">
                     <div className='container-control-user-principal'>
                         <Box sx={{ minWidth: 330, maxWidth: 330, marginRight:15, marginTop:2}}>

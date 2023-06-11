@@ -26,7 +26,7 @@ export const useRevision = ()=>{
               Actual_amount: element.Actual_amount,
               createdAt: element.createdAt,
               Inventory_id: element.Inventory_id,
-              dataInventory: inventory.filter((row)=> row.Inventory_id == element.Inventory_id).length != 0 ? inventory.filter((row)=> row.Inventory_id == element.Inventory_id)[0]: null
+              dataInventory: inventory.filter((row)=> row.Inventory_id == element.Inventory_id).length != 0 ? inventory.filter((row)=> row.Inventory_id === element.Inventory_id)[0]: null
             })
           })
           setRevision(dataRevisionWithInventory)
@@ -35,7 +35,6 @@ export const useRevision = ()=>{
             console.log("Error", error);
         });
       }
-      
       fetchData();
       
         

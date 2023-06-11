@@ -5,7 +5,7 @@ import Aux from '../../../../../hooks/_Aux'
 
 import Avatar1 from '../../../../../assets/images/user/avatar-2.jpg'
 // import Notifications from './notifications/index'
-
+import '../../../../../assets/css/layout.css'
 const NavRight = props => {
     const closeSession = () => {
         localStorage.clear()
@@ -15,10 +15,6 @@ const NavRight = props => {
     return (
         <Aux>
             <ul className='navbar-nav ml-auto'>
-                {/* <li>
-                    <Notifications {...props} />
-                </li>
-                | */}
                 <li>
                     <Dropdown alignRight={!props.rtlLayout} className='drp-user'>
                         <Dropdown.Toggle variant={'link'} id='dropdown-basic'>
@@ -50,17 +46,12 @@ const NavRight = props => {
                                 </li>
                             </ul> */}
 
-                            <ul className='pro-body'>
+                            {/* <ul className='pro-body'>
                                 <li>
                                     <a href className='dropdown-item'>
                                         <i className='feather icon-user' /> Mi perfil
                                     </a>
                                 </li>
-                                {/* <li>
-                                    <a href className='dropdown-item'>
-                                        <i className='feather icon-mail' /> Notificaciones
-                                    </a>
-                                </li> */}
                                 <li>
                                     <a href className='dropdown-item'>
                                         <i className='feather icon-settings' />
@@ -72,7 +63,7 @@ const NavRight = props => {
                                         <i className='feather icon-alert-triangle' /> Informar un error
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> */}
                         </Dropdown.Menu>
                     </Dropdown>
                 </li>

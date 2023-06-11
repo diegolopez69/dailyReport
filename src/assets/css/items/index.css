@@ -15,3 +15,7 @@
 .title-item-modalCreate{
     text-align: left;
 }
+.container-control-items-principal{
+    display: flex;
+    justify-content: right;
+}

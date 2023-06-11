@@ -30,9 +30,7 @@ export const useComputers = (type)=>{
                 }
               })
         .then(response => response.data.status)
-        .catch(error => {
-            console.log("Error", error);
-        });
+        .catch(error => error);
         return result;
     }
     const editComputerById = async(computer)=>{
@@ -43,9 +41,7 @@ export const useComputers = (type)=>{
             }
           })
         .then(response => response.data.status)
-        .catch(error => {
-            console.log("Error", error);
-        });
+        .catch(error => error);
         return result;
     }
     const createComputer = async(computer)=>{
@@ -55,10 +51,8 @@ export const useComputers = (type)=>{
             'Content-Type': 'application/json'
           }
         })
-      .then(response => response.data.status)
-      .catch(error => {
-          console.log("Error", error);
-      });
+      .then(response => response.status)
+      .catch(error => error);
       return result;
     }
   

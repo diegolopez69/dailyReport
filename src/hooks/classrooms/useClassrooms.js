@@ -30,27 +30,23 @@ export const useClassrooms = ()=>  {
             }
         })
         .then(response => response.data.status)
-        .catch(error => {
-            console.log("Error", error);
-        });
+        .catch(error => error.message);
         return result;
     }
     const editClassroomById = async(classroom)=>{
-        const result = await axios.put(url_api+`/api/classroom/${classroom.Classroom_id}`, classroom,{
+        const result = await axios.put(url_api+`/api/classroom/${classroom.Classroom_id}`, {Floor: classroom.Floor, Number: classroom.Number},{
             headers: {
             'x-access-token': localStorage.getItem('token'),
             'Content-Type': 'application/json'
             }
         })
-        .then(response => response.data.status)
-        .catch(error => {
-            console.log("Error", error);
-        });
+        .then(response => response.status)
+        .catch(error => error.message);
         return result;
     }
     const createClassroom = async(classroom)=>{
     
-        const result = await axios.post(url_api+`/api/classroom`, classroom,{
+        const result = await axios.post(url_api+`/api/classroom`,classroom ,{
             headers: {
                 'x-access-token': localStorage.getItem('token'),
                 'Content-Type': 'application/json'

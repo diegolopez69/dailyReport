@@ -25,9 +25,12 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import TabPanel from '@mui/lab/TabPanel';
 import AddIcon from '@mui/icons-material/Add';
 import ModalCreateEditItem from './ModalCreateEditItem'
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
 const Items = props => {
     const gridRef = useRef();
-    
+    const [nameSoftwareControl, setNameSoftwareControl] = useState('')
+    const [nameHardwareControl, setHardwareControl]= useState('')
     const [openOkResponse, setOkResponse] =useState(false);
     const [openErrorResponse, setErrorResponse] =useState(false);
     const { dataSoftware, dataHardware, deleteItemById} = useItems();    
@@ -86,7 +89,6 @@ const Items = props => {
     const deleteItem = async(item)=>{
 
         const result = await deleteItemById(item);
-        console.log(result)
         if(result ==200){
             setDeleteItemOk(true)
             setOkResponse(true)
@@ -94,6 +96,12 @@ const Items = props => {
             setDeleteItemError(true)
             setErrorResponse(true)
         }
+    }
+    const handleClearSoftwareControl = ()=>{
+        setNameSoftwareControl('')
+    }
+    const handleClearHardwareControl = ()=>{
+        setHardwareControl('')
     }
     return (
         <>
@@ -113,6 +121,21 @@ const Items = props => {
                 </Box>                
                 <div className='container-table-hardware'>
                 <TabPanel value="1">
+                        <div className='container-control-items-principal'>
+                            <Box sx={{ minWidth: 330, maxWidth: 330, marginRight:12, marginTop:0}}>
+                            <FormControl fullWidth>
+                                <TextField 
+                                    sx={{ minWidth:430, textAlign:'left', maxHeight:10, marginBottom:8.5}}
+                                        id="outlined-required"
+                                        label="Nombre"
+                                        type='text'
+                                        value={nameHardwareControl}
+                                        onChange={(event)=>setHardwareControl(event.target.value)}
+                                />
+                            </FormControl>
+                            </Box>
+                            <button className='bt-add-default' style={{marginTop:1, marginLeft:20, marginRight:4}} onClick={handleClearHardwareControl}>LIMPIAR</button>
+                        </div>
                         <TableContainer component={Paper} sx={{ minWidth: 150, align:"center"}} >
                             <Table sx={{ }} aria-label="simple table" align="center">
                                 <TableHead>
@@ -128,8 +151,11 @@ const Items = props => {
                                 {dataHardware.length == 0 ?  ""
                                 :    
                                 (rowsPerPageHardware > 0
-                                    ? dataHardware.slice(pageHardware * rowsPerPageHardware, pageHardware * rowsPerPageHardware + rowsPerPageHardware)
-                                    : dataHardware)
+                                    ? dataHardware
+                                        .filter((element)=> nameHardwareControl == ''? element: (element.Name.includes(nameHardwareControl)))
+                                        .slice(pageHardware * rowsPerPageHardware, pageHardware * rowsPerPageHardware + rowsPerPageHardware)
+                                    : dataHardware.filter((element)=> nameHardwareControl == ''? element: (element.Name.includes(nameHardwareControl))))
+
                                     .map((row, index) => {
                                     return(
                                     <TableRow key={index} style={{height:'20px'}}>  
@@ -147,7 +173,7 @@ const Items = props => {
                                     <TableRow >  
                                     <TablePagination
                                     rowsPerPageOptions={[5, 10]}
-                                    count={0}
+                                    count={dataHardware.filter((element)=> nameHardwareControl == ''? element: (element.Name.includes(nameHardwareControl))).length}
                                     rowsPerPage={rowsPerPageHardware}
                                     page={pageHardware}
                                     onPageChange={handleChangePageHardware}
@@ -164,6 +190,21 @@ const Items = props => {
                 </div>
                 <div className='container-table-software'>
                 <TabPanel value="2">
+                        <div className='container-control-items-principal'>
+                            <Box sx={{ minWidth: 330, maxWidth: 330, marginRight:12, marginTop:0}}>
+                            <FormControl fullWidth>
+                                <TextField 
+                                    sx={{ minWidth:430, textAlign:'left', maxHeight:10, marginBottom:8.5}}
+                                        id="outlined-required"
+                                        label="Nombre"
+                                        type='text'
+                                        value={nameSoftwareControl}
+                                        onChange={(event)=>setNameSoftwareControl(event.target.value)}
+                                />
+                            </FormControl>
+                            </Box>
+                            <button className='bt-add-default' style={{marginTop:1, marginLeft:20, marginRight:4}} onClick={handleClearSoftwareControl}>LIMPIAR</button>
+                        </div>
                         <TableContainer component={Paper} sx={{ minWidth: 150, align:"center"}} >
                             <Table sx={{ }} aria-label="simple table" align="center">
                                 <TableHead>
@@ -179,8 +220,10 @@ const Items = props => {
                                 {dataSoftware.length == 0 ?  <TableCell align="center"></TableCell>
                                 :    
                                 (rowsPerPageSoftware > 0
-                                    ? dataSoftware.slice(pageSoftware * rowsPerPageSoftware, pageSoftware * rowsPerPageSoftware + rowsPerPageSoftware)
-                                    : dataSoftware)
+                                    ? dataSoftware
+                                        .filter((element)=> nameSoftwareControl == ''? element: (element.Name.includes(nameSoftwareControl)) )
+                                        .slice(pageSoftware * rowsPerPageSoftware, pageSoftware * rowsPerPageSoftware + rowsPerPageSoftware)
+                                    : dataSoftware.filter((element)=> nameSoftwareControl == ''? element: (element.Name.includes(nameSoftwareControl)) ))
                                     .map((row, index) => {
                                     return(
                                     <TableRow key={index} style={{height:'20px'}}>  
@@ -198,7 +241,7 @@ const Items = props => {
                                     <TableRow >  
                                     <TablePagination
                                     rowsPerPageOptions={[5, 10]}
-                                    count={0}
+                                    count={dataSoftware.filter((element)=> nameSoftwareControl == ''? element: (element.Name.includes(nameSoftwareControl)) ).length}
                                     rowsPerPage={rowsPerPageSoftware}
                                     page={pageSoftware}
                                     onPageChange={handleChangePageSoftware}

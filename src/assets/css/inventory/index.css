@@ -23,3 +23,16 @@
     margin-top: 1.5%;
     margin-bottom: 2%;
 }
+.tables-type-inventory-body{
+    background-color: white;
+    margin-top: 40px;
+    padding: 20px;
+}
+.body-inventory{
+    margin-top: 40px;
+}
+.container-control-inventory{
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+}

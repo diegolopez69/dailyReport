@@ -1,0 +1,10 @@
+.container-table-classrooms{
+    background-color: white;
+    margin-top: 40px;
+    padding: 20px;
+}
+.container-control-classroom-principal{
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+}

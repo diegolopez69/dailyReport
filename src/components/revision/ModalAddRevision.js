@@ -150,7 +150,8 @@ const ModalAddRevision =({openModal})=> {
             setTimeout(() => {
                 setWarningSaveRevision(-1)
               }, 3000);
-        }else if(classroomControl == '' || floorControl == ''){
+        }else if(classroomControl === '' || floorControl === ''){
+            console.log("FILTROS VACIOS")
             setWarningSaveRevision(0)
             setTimeout(() => {
                 setWarningSaveRevision(-1)
@@ -225,7 +226,7 @@ const ModalAddRevision =({openModal})=> {
 
                         onChange={ (event)=> setClassroomControl(event.target.value )}
                         >
-                        {classrooms.filter((row)=> (floorControl == ''? row: floors[floorControl] == row.Floor )).map((element, index)=>{
+                        {classrooms.filter((row)=> (floorControl == '' && floorControl != 0? row: floors[floorControl] == row.Floor )).map((element, index)=>{
                             return <MenuItem value={element.Classroom_id}>{element.Floor}.{element.Number}</MenuItem>
                             })
                             
@@ -266,16 +267,16 @@ const ModalAddRevision =({openModal})=> {
                         <TableBody>
                         {dataRevision.length == 0 ?  <TableCell align="center">Cargando..</TableCell>
                         :
-                        (classroomControl == '' || floorControl == '')?
+                        (classroomControl == '' || (floorControl == '' && floorControl != 0))?
                             <>
                             <h5 className='text-to-referenceControl'>  Seleciona la planta y el aula</h5>
                             <WarningAmberRoundedIcon color="secondary"/>
                             </>
                         :
                         (rowsPerPage > 0
-                            ? dataRevision.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            : dataRevision)
-                            .filter((dataRow)=> dataRow.Classroom_id == (classroomControl != ''? classroomControl: null)).map((row, index) => {
+                            ? dataRevision.filter((dataRow)=> dataRow.Classroom_id == (classroomControl != '' || classroomControl == 0? classroomControl: null)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            : dataRevision.filter((dataRow)=> dataRow.Classroom_id == (classroomControl != '' || classroomControl == 0? classroomControl: null)))
+                            .map((row, index) => {
                             return(
                                 
                                 <TableRow key={index} style={{height:'20px'}}>
@@ -297,7 +298,7 @@ const ModalAddRevision =({openModal})=> {
                             <TableRow >  
                             <TablePagination
                             rowsPerPageOptions={[5, 10]}
-                            count={0}
+                            count={dataRevision.filter((dataRow)=> dataRow.Classroom_id == (classroomControl != ''? classroomControl: null)).length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             onPageChange={handleChangePage}

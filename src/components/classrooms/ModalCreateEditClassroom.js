@@ -1,43 +1,75 @@
 import React, { useState } from "react"
 import { useClassrooms } from "../../hooks/classrooms/useClassrooms";
 import '../../assets/css/classroom/modalCreateEdit.css'
-const ModalCreateEditClassroom =({ openModal, classroom })=>{
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+const ModalCreateEditClassroom =({ openModal, classroom ,responseOk, responseError })=>{
     
     const [currentClassroom, setCurrentClassroom] = useState( classroom? classroom:{ Floor:"", Number:""});
     const {editClassroomById, createClassroom}  = useClassrooms();
     
     const handlerEditCreateCurrentClassroom = async( )=>{
         if(classroom){
-            editClassroomById(currentClassroom);
-            openModal(false);
+            const result = await editClassroomById(currentClassroom);
+            console.log(currentClassroom);
+            console.log(result);
+            if(result == 200){
+                responseOk(true)
+                openModal(false);
+            }else{
+                responseError(true)
+            }
         }else{
-            console.log(currentClassroom)
-            console.log( await createClassroom(currentClassroom));
-            // openModal(false);
+            const result = await createClassroom(currentClassroom);
+            if(result == 201){
+                responseOk(true)
+                openModal(false);
+            }else{
+                responseError(true)
+            }
         }
     }
     
     return (
         <div className="modalBackground">
             <div className="modalContainer">
-                <div className="header-modal">
-                <button className="bt-close" onClick={()=> openModal(false)}>X</button>
+                <div className='tittle-header-modal-classroom'>
+                    <h5 className="title-item-modalCreate">{classroom?  "Aula":"Nuevo Aula"} </h5>
+                    <br></br>
                 </div>
-                <div className="body-add-edit">
-                    <div className="container-row-floor">
-                        <h4>Planta:</h4>
-                        <input className="input-number" type="number" defaultValue={currentClassroom.Floor} onChange={( e )=> setCurrentClassroom( {...currentClassroom, Floor: e.target.value})} placeholder="Planta" required></input>
-                    </div>
-                    <hr/>
-                    <div className="container-row-number">
-                        <h4>Número:</h4>
-                        <input className="input-number" type="number" defaultValue={currentClassroom.Number} onChange={( e )=> setCurrentClassroom( {...currentClassroom, Number: e.target.value})} placeholder="Número" required></input>
-                    </div>
-                    <hr/>
+                <div className="body-add-edit-classroom">
+                    <Box sx={{ minWidth: 460, maxWidth: 460, marginTop:2, marginBottom:7 }}>
+                        <FormControl fullWidth > 
+                            <TextField 
+                                sx={{ minWidth:460, maxWidth: 460, textAlign:'left', maxHeight:10}}
+                                    id="outlined-required"
+                                    type='number'
+                                    label="Planta"
+                                    defaultValue={currentClassroom.Floor}
+                                    onChange={(event)=>setCurrentClassroom({...currentClassroom, Floor:event.target.value})}
+                            />                        
+                        </FormControl>
+                    </Box>
+                    <Box sx={{ minWidth: 460, maxWidth: 460, marginTop:2, marginBottom:9 }}>
+                    <FormControl fullWidth > 
+                            <TextField 
+                                sx={{ minWidth:460, maxWidth: 460, textAlign:'left', maxHeight:10}}
+                                    id="outlined-required"
+                                    type='number'
+                                    label="Número"
+                                    defaultValue={currentClassroom.Number}
+                                    onChange={(event)=>setCurrentClassroom({...currentClassroom, Number:event.target.value})}
+                            />             
+                    </FormControl>
+                    </Box>
                 </div>
                 <div className="footer">
-                    <button className="bt-cancel" onClick={()=> openModal(false)}>Cancelar</button>
-                    <button className="bt-edit" onClick={handlerEditCreateCurrentClassroom}>Guardar</button>
+                    <button className="bt-close-modal-create" onClick={()=> openModal(false)}>CERRAR</button>
+                    <button className="bt-save-modal-create" onClick={handlerEditCreateCurrentClassroom}>GUARDAR</button>
                 </div>
             </div>
         </div>

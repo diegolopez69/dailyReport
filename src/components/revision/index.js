@@ -35,8 +35,8 @@ const Revision =() => {
   const { revision } = useRevision();
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [openModalCreateRevision, setOpenModalCreateRevision] = useState(false);
- 
-
+  const moment = require('moment');
+  const currentWeek = moment().week();
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -88,7 +88,7 @@ const Revision =() => {
               label="Age"
               onChange={ (event)=> setClassroomControl(event.target.value )}
             >
-              {classrooms.filter((row)=> floorControl == ''? row:(floors[floorControl] === row.Floor)).map((element, index)=>{
+              {classrooms.filter((row)=> floorControl == '' && floorControl != 0? row:(floors[floorControl] === row.Floor)).map((element, index)=>{
                   return <MenuItem value={element.Classroom_id}>{element.Floor}.{element.Number}</MenuItem>
                 })
                 
@@ -104,8 +104,9 @@ const Revision =() => {
                 ><CalendarMonthIcon/></InputAdornment>,
             }}
             id="outlined-required"
-            label="Semana"
+            label={"Semana " + currentWeek}
             type='number'
+            onChange={(event)=>setWeekControl(event.target.value)}
             defaultValue={weekControl}
           />
         </Box>
@@ -130,23 +131,45 @@ const Revision =() => {
               {revision.length == 0 ?  <TableCell align="center">Cargando..</TableCell>
               :    
               (rowsPerPage > 0
-                  ? revision.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  : revision)
-                  .filter((dataRow)=> floorControl != null?(dataRow.dataInventory != null? dataRow.dataInventory.tb_classroom.Floor == floors[floorControl]: null) : dataRow).filter((dataRow) =>(classroomControl != '')? (dataRow.dataInventory != null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null): dataRow ).map((row, index) => {
-                  // const inventoryFiltered = dataInventory.map((ele)=> ele.Inventory_id == row.Inventory_id)                  
-                  return(
-                    <TableRow key={index} style={{height:'20px'}}>
-                      <TableCell style={{fontFamily:'Open Sans'}}>
-                          <Checkbox {...label} width="70px" color="success" checked={row.there_is} />
-                      </TableCell>                      
-                      <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.tb_tool.Name: ""}</TableCell>
-                      <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.tb_tool.Type: ""}</TableCell>
-                      <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.computer.Name: ""}</TableCell>
-                      <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>1</TableCell>
-                      <TableCell align="center"><Switch checked={row.Works} /></TableCell>                                
-                    </TableRow>
-                  )
-                }
+                  ? revision
+                  .filter((dataRow)=> 
+                    floorControl == '' && floorControl !== 0 ?
+                      dataRow
+                    :(dataRow.dataInventory !== null? 
+                      (dataRow.dataInventory.tb_classroom.Floor == floors[floorControl]): null))
+                  .filter((dataRow) =>
+                  (classroomControl !== '')? 
+                  (dataRow.dataInventory !== null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null)
+                  :dataRow )
+                  .filter((y) => weekControl == ''? y : (moment(y.createdAt).week() ==weekControl) )
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : revision
+                    .filter((dataRow)=> 
+                    floorControl == '' && floorControl !== 0 ?
+                      dataRow
+                    :(dataRow.dataInventory !== null? 
+                      (dataRow.dataInventory.tb_classroom.Floor == floors[floorControl]): null))
+                    .filter((dataRow) =>
+                    (classroomControl !== '')? 
+                    (dataRow.dataInventory !== null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null)
+                    :dataRow)
+                    .filter((y) => weekControl == ''? y : (moment(y.createdAt).week ==weekControl) )
+                  )     
+                  .map((row, index) => {
+                        return(
+                          
+                          <TableRow key={index} style={{height:'20px'}}>
+                            <TableCell style={{fontFamily:'Open Sans'}}>
+                                <Checkbox {...label} width="70px" color="success" checked={row.there_is} />
+                            </TableCell>                      
+                            <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.tb_tool.Name: ""}</TableCell>
+                            <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.tb_tool.Type: ""}</TableCell>
+                            <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.computer.Name: ""}</TableCell>
+                            <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>1</TableCell>
+                            <TableCell align="center"><Switch checked={row.Works} /></TableCell>                                
+                          </TableRow>
+                        )
+                      }
               )
               }
               </TableBody> 
@@ -154,7 +177,16 @@ const Revision =() => {
                   <TableRow >  
                   <TablePagination
                   rowsPerPageOptions={[5, 10]}
-                  count={0}
+                  count={revision
+                    .filter((dataRow)=> 
+                      floorControl == '' && floorControl !== 0 ?
+                        dataRow
+                      :(dataRow.dataInventory !== null? 
+                        (dataRow.dataInventory.tb_classroom.Floor == floors[floorControl]): null))
+                    .filter((dataRow) =>
+                    (classroomControl !== '')? 
+                    (dataRow.dataInventory !== null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null)
+                    :dataRow ).length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}
