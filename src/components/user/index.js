@@ -89,8 +89,8 @@ const User =()=>{
                         <button className='bt-add-default' style={{marginTop:16, marginLeft:20, marginRight:10 }} onClick={handleClearControl}>LIMPIAR</button>
                     </div>
                     <div className="col-12 row"> 
-                        {usersGeneral.length === 0? "..error al cargar los datos": usersGeneral
-                        .filter(x => x.username.includes(usernameControl)).filter(y => y.email.includes(emailControl)).map((element)=>{
+                        {usersGeneral.length === 0? "": usersGeneral
+                        .filter(x => usernameControl != ''? x.username.includes(usernameControl): x).filter(y => emailControl != ''? y.email.includes(emailControl): y).map((element)=>{
                             return( <Card key={element.id} data={element} currentUser={setCurrentUser} method={setMethodModal} openModal={setOpenModalNewUser} openOkResponse={setOkResponse} openErrorResponse={setErrorResponse} openDeleteUser={setDeleteUser} openDeleteErrorUser={setDeleteUserError}/>)
                         }) } 
                     </div>  

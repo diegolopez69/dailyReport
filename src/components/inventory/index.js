@@ -137,7 +137,8 @@ const InventoryGeneral = () => {
                       <TableCell width="10px" style={{fontFamily:'Open Sans', fontSize:'16px'}} >Nº</TableCell>
                       <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Ordenador</TableCell>
                       <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Ítem</TableCell>
-                      <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Tipo</TableCell>                    
+                      <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Tipo</TableCell>
+                      <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Cantidad</TableCell>                      
                       <TableCell width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Acciones</TableCell>
                   </TableRow>
                   </TableHead>
@@ -154,6 +155,7 @@ const InventoryGeneral = () => {
                           <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.computer.Name}</TableCell>
                           <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.tb_tool.Name}</TableCell>
                           <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.tb_tool.Type}</TableCell>
+                          <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Amount}</TableCell>
                           <TableCell align="center"><EditIcon className='icon-edit' onClick={ ()=>handleCreateEditInventory(row)} /><DeleteIcon className='icon-delete' onClick={()=>handleDeleteInventory(row)}/></TableCell>
                       </TableRow>
                       )

@@ -36,7 +36,7 @@ const Card =( {data, currentUser, openModal, method, openOkResponse, openeErrorR
                 </div>                
                 
                 <div className="lower-container">
-                    <h3>{data.username}</h3>
+                    <h3>{data.name}</h3>
                     <h4>{data.email}</h4>
                     <div className="lower-rol-container">
                         <h5>{data.roles.length == 3? "Admin":(data.roles.length == 2? "Moderator": "User")}</h5>

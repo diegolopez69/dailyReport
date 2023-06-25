@@ -13,7 +13,7 @@ import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import { IconButton } from "rsuite";
 
 const ModalAddUser =({ openModal, method, user, openSuccessResponse, openErrorResponse, userExist })=>{
-    const [username, setUsername] = useState( user? user.username: "");
+    const [username, setUsername] = useState( user? user.name: "");
     const [email, setEmail] = useState(user ? user.email:"")
     const [password, setPassword] = useState("")
     const [rol, setRol] =useState(user? user.roles.length ==3? "admin": user.roles.length == 2?"moderator":"user":"user")
@@ -73,7 +73,6 @@ const ModalAddUser =({ openModal, method, user, openSuccessResponse, openErrorRe
                     <h5>{method === 'create'? "Nuevo Usuario" : "Usuario"} </h5>
                     <br></br>
                 </div>
-                {/* {console.log(user.roles.length) } */}
                 <div className="body-user-add">
                 <div className='container-control-user'>
                     <Box sx={{ minWidth: 460, maxWidth: 460, marginTop:2, marginBottom:7 }}>

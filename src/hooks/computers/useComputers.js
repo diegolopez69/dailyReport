@@ -34,7 +34,7 @@ export const useComputers = (type)=>{
         return result;
     }
     const editComputerById = async(computer)=>{
-        const result = await axios.put(url_api+`/api/computer/${computer.Computer_id}`, {Name:computer.Name},{
+        const result = await axios.put(url_api+`/api/computer/${computer.Computer_id}`, {Name:computer.Name, Serie:computer.Serie},{
             headers: {
               'x-access-token': localStorage.getItem('token'),
               'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export const useComputers = (type)=>{
         return result;
     }
     const createComputer = async(computer)=>{
-      const result = await axios.post(url_api+`/api/computer`, {Name:computer.Name},{
+      const result = await axios.post(url_api+`/api/computer`, {Name:computer.Name, Serie:computer.Serie},{
           headers: {
             'x-access-token': localStorage.getItem('token'),
             'Content-Type': 'application/json'

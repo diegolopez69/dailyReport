@@ -1,4 +1,6 @@
 import { Bar } from 'react-chartjs-2';
+import { useState, useEffect } from "react"
+import axios from 'axios';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -54,7 +56,28 @@ var midata = {
         }
     ]
 };
+const Bars = ()=> {
+    const [users, setUsers] = useState([]);
+    const url_api = process.env.REACT_APP_BASE_API;
+    useEffect(()=>{
+    const fetchData = async()=>{
+        await axios.get(url_api+'/api/user-roles',{
+          headers: {
+            'x-access-token': localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+            setUsers(response.data)
+        })
+        .catch(error => {
+            console.log("Error", error);
+        });
+      }
+      
+      fetchData();
+    }, [users])
 
-export default function Bars() {
     return <Bar data={midata} options={misoptions} />
 }
+export default Bars

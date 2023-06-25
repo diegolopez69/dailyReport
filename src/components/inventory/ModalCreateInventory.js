@@ -15,6 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { floors } from './default-data';
+import TextField from '@mui/material/TextField';
 import { useClassrooms } from '../../hooks/classrooms/useClassrooms';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -31,8 +32,9 @@ const ModalCreateInventory =({openModal, inventory,  responseOk, responseError})
     const {classrooms} = useClassrooms();
     const {createInventory, updateInventory} = useInventory();
     const theme = useTheme();
+    const [amount, setAmount ]= useState(inventory? inventory.Amount:0);
     const [selectedFloor, setSelectedFloor] = useState( inventory? floors.indexOf(inventory.tb_classroom.Floor):'');
-    const[selectedItems, setSelectedItems] =useState(inventory? inventory.Tool_id:[]);
+    const[selectedItems, setSelectedItems] =useState(inventory? inventory.Tool_id:'');
     const [selectedClassroom, setSelectedClassroom] = useState(inventory? inventory.tb_classroom.Classroom_id:'')
     const[selectedComputer, setSelectedComputer] =useState(inventory? inventory.Computer_id: '')
     const {tools} = useItems();
@@ -47,13 +49,15 @@ const ModalCreateInventory =({openModal, inventory,  responseOk, responseError})
     }
     const handlerSaveChanges = async()=>{
         if(inventory){
-            if(selectedClassroom == '' ||  selectedClassroom == ''  || selectedComputer == '' || selectedItems == ''){
+            if(selectedClassroom == '' ||  selectedClassroom == ''  || selectedComputer == '' || selectedItems == '' || amount == ''){
                 setErrorFields(true)
                 setTimeout(() => {
                     setErrorFields(false)
                 }, 4000);
             }else{
-                const result = await updateInventory( inventory.Inventory_id, selectedClassroom, selectedComputer, selectedItems);
+                       
+                console.log(selectedClassroom, selectedComputer, selectedItems, amount)
+                const result = await updateInventory( inventory.Inventory_id, selectedClassroom, selectedComputer, selectedItems, parseInt(amount) );
                 if(result == 200){
                     responseOk(true)
                     openModal(false);
@@ -64,15 +68,15 @@ const ModalCreateInventory =({openModal, inventory,  responseOk, responseError})
 
             
         }else{
-            if(selectedClassroom == '' ||  selectedClassroom == ''  || selectedComputer == '' || selectedItems.length == 0){
+            if(selectedClassroom == '' ||  selectedClassroom == ''  || selectedComputer == '' || selectedItems == '' || amount == ''){
                 setErrorFields(true)
                 setTimeout(() => {
                     setErrorFields(false)
                 }, 4000);
             }else{                
                 console.log(selectedClassroom, selectedComputer, selectedItems)
-                const result = await createInventory(selectedClassroom, selectedComputer, selectedItems);
-                if(result[result.length-1] == 201){
+                const result = await createInventory(selectedClassroom, selectedComputer, selectedItems,parseInt(amount) );
+                if(result == 201){
                     responseOk(true)
                     openModal(false);
                 }else{
@@ -100,6 +104,7 @@ const ModalCreateInventory =({openModal, inventory,  responseOk, responseError})
                     <Box sx={{ minWidth: 400, maxWidth: 400, marginRight:3, marginBottom:3, marginTop:2}}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Planta</InputLabel>
+                            
                             <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -138,6 +143,7 @@ const ModalCreateInventory =({openModal, inventory,  responseOk, responseError})
                     <Box sx={{ minWidth: 400, maxWidth: 400, marginRight:3, marginBottom:3}}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Ordenador</InputLabel>
+                            
                             <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -154,69 +160,37 @@ const ModalCreateInventory =({openModal, inventory,  responseOk, responseError})
                             </Select>
                         </FormControl>
                     </Box>
-                    {
-                        inventory?
-                            <Box sx={{ minWidth: 400, maxWidth: 400, marginRight:3}}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Ítems</InputLabel>
-                                <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={selectedItems}
-                                label="Age"
+                    <Box sx={{ minWidth: 400, maxWidth: 400, marginRight:3}}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Ítems</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={selectedItems}
+                        label="Age"
 
-                                onChange={ (event)=> setSelectedItems(event.target.value )}
-                                >
-                                {tools.map((element, index)=>{
-                                    return <MenuItem value={element.Tool_id}>{element.Name}</MenuItem>
-                                    })
-                                    
-                                }
-                                </Select>
-                            </FormControl>
-                            </Box>
-                        :
-                        <Box sx={{ minWidth: 400, maxWidth: 400, marginRight:3, marginBottom:3}}>
+                        onChange={ (event)=> setSelectedItems(event.target.value )}
+                        >
+                        {tools.map((element, index)=>{
+                            return <MenuItem value={element.Tool_id}>{element.Name}</MenuItem>
+                            })
+                            
+                        }
+                        </Select>
+                    </FormControl>
+                    </Box> 
+                    <Box sx={{ minWidth: 330,  maxWidth: 330, marginRight:12, marginTop:2}}>
                         <FormControl fullWidth>
-                        <InputLabel id="demo-multiple-chip-label">Ítems</InputLabel>
-                            <Select
-                            labelId="demo-multiple-chip-label"
-                            id="demo-multiple-chip"
-                            multiple
-                            value={selectedItems}
-                            onChange={handleChange}
-                            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-                            renderValue={(selected) => (
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                {selected.map((row, index) => {
-                                    const filteredItems = itemsFormat.filter(obj => obj.value === row);
-
-                                    return(                                     
-                                    <>
-                                     {filteredItems.map((item, index)=>
-                                        <Chip key={index} label={item.label} />
-                                    )}
-                                    </>                             
-                                    
-                                )})}
-                                </Box>
-                            )}
-                            MenuProps={MenuProps}
-                            >
-                            {itemsFormat.map((row, index) => (
-                                <MenuItem
-                                key={index}
-                                value={row.value}
-                                style={getStyles(row.value, selectedItems, theme)}
-                                >
-                                {row.label}
-                                </MenuItem>
-                            ))}
-                            </Select>
+                            <TextField 
+                                sx={{ minWidth:400,maxHeight:10, maxHeight:1, marginBottom:3}}
+                                    id="outlined-required"
+                                    label="Cantidad"
+                                    type='number'
+                                    value={amount}
+                                    onChange={(event)=>setAmount(event.target.value)}
+                            />
                         </FormControl>
-                        </Box>
-                    }
-                    
+                    </Box>
                 </div>
                 <div className='errorFields'>{errorFields? "Complete correctamente los campos": ""}</div>
                 <div className="footer">

@@ -123,7 +123,7 @@ const Computers = ()=> {
                       <TableRow key={index} style={{height:'20px'}}>  
                           <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{index}</TableCell>
                           <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Name}</TableCell>
-                          <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>Serie</TableCell>
+                          <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Serie}</TableCell>
                           <TableCell align="center"><EditIcon className='icon-edit' onClick={ ()=>handleCreateEditComputer(row)} /><DeleteIcon className='icon-delete' onClick={()=>deleteComputer(row)}/></TableCell>
                       </TableRow>
                       )

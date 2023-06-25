@@ -11,6 +11,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import dayjs from 'dayjs';
 import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -25,21 +26,68 @@ import TextField from '@mui/material/TextField';
 import { useRevision } from '../../hooks/revision/useRevision';
 import ModalAddRevision from './ModalAddRevision'
 import Switch from '@mui/material/Switch';
+import { element } from 'prop-types';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import { IconButton } from "rsuite";
 const Revision =() => {
   const {classrooms} = useClassrooms();
   const [floorControl, setFloorControl] = useState('');
+  const [onDelete, setDeleteRevision] = useState(false)
   const [classroomControl, setClassroomControl] = useState('');
   const [weekControl, setWeekControl] = useState('');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { revision } = useRevision();
+  const { revision, deleteRevision } = useRevision(); 
+  
+  const [openOkResponse, setOkResponse] =useState(false);
+  const [openErrorResponse, setErrorResponse] =useState(false);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const [openModalCreateRevision, setOpenModalCreateRevision] = useState(false);
   const moment = require('moment');
   const currentWeek = moment().week();
+  const [openCalendar, setOpenCalendar] = useState(false);
+
+  const AlertResponse = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+
+    setErrorResponse(false);
+    setOkResponse(false);
+};
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const hanlderDeleteRevision = async () =>{
+    console.log(floorControl,classroomControl, weekControl)
+    const dataToDelete = revision.length == 0 ? 'No data': revision
+      .filter((dataRow)=> 
+        floorControl == '' && floorControl !== 0 ?
+          ''
+        :(dataRow.dataInventory !== null? 
+          (dataRow.dataInventory.tb_classroom.Floor == floors[floorControl]): null))
+          .filter((dataRow) =>
+            (classroomControl !== '')? 
+            (dataRow.dataInventory !== null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null)
+            :'')
+              .filter((y) => weekControl == ''? '' : (moment(y.createdAt).week() == weekControl))
+      .map((element) => element.Checkup_id)
+    
+    console.log(dataToDelete)
+    const result = await deleteRevision(dataToDelete)
+    if(result[result.length-1] == 200){
+        setOkResponse(true)
+    }else{
+        setErrorResponse(true)
+    }
+  }
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -51,6 +99,10 @@ const Revision =() => {
   }
   const handlerCreateRevision = ()=>{
     setOpenModalCreateRevision(true)
+  }
+  const  handleCalendar = (event)=>{
+    setWeekControl(event.week())
+    setOpenCalendar(false)
   }
   return (
     <>
@@ -100,19 +152,77 @@ const Revision =() => {
           <TextField
           sx={{ minWidth:330}}
             InputProps={{
-              endAdornment: <InputAdornment 
-                ><CalendarMonthIcon/></InputAdornment>,
+              endAdornment: 
+              <InputAdornment sx={{textAlign:'center'}} position="end">
+                <IconButton
+                  className='icon-calendar-revision'
+                  aria-label="toggle password visibility"
+                  onClick={ ()=> setOpenCalendar(true)}
+                  edge="end"
+                >
+                   <CalendarMonthIcon                    
+                   onChange={()=> setOpenCalendar(false)}/>
+                </IconButton>
+              </InputAdornment>
             }}
             id="outlined-required"
             label={"Semana " + currentWeek}
             type='number'
-            onChange={(event)=>setWeekControl(event.target.value)}
-            defaultValue={weekControl}
+            // disabled
+            // onChange={(event)=>setWeekControl(event.target.value)}
+            // defaultValue={weekControl}
+            value={weekControl}
           />
         </Box>
+        { openCalendar &&
+          <div  style={{ position: 'relative' , backgroundColor:'gray' }} className='container-calendar-div'>
+                <LocalizationProvider
+              dateAdapter={AdapterDayjs}
+               
+              localeText={{
+                calendarWeekNumberHeaderText: '#',
+                calendarWeekNumberText: (weekNumber) => `${weekNumber}.`,
+              }}
+            >
+              <DateCalendar 
+              style={{
+                position: 'absolute',
+                top: 0,
+                minWidth: 350,
+                maxWidth:450,
+                right: 5,
+                height:600,
+                zIndex: 9999,
+                borderColor: 'black',
+                backgroundColor: 'white',
+                color: 'black' // Ajusta este valor según sea necesario
+              }}  
+              onChange={handleCalendar}
+              displayWeekNumber />
+            </LocalizationProvider>
+          </div>
+          
+        }
         <button className='bt-add-default' onClick={handleClearControl}>LIMPIAR</button>
       </div>
       <div className='table-revision-body'>
+        {(floorControl !== '' & classroomControl !== '' & weekControl !== '' )
+          &&
+          (revision
+          .filter((dataRow)=> 
+          floorControl == '' && floorControl !== 0 ?
+            dataRow
+          :(dataRow.dataInventory !== null? 
+            (dataRow.dataInventory.tb_classroom.Floor == floors[floorControl]): null))
+          .filter((dataRow) =>
+          (classroomControl !== '')? 
+          (dataRow.dataInventory !== null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null)
+          :dataRow)
+          .filter((y) => weekControl == ''? y : (moment(y.createdAt).week() ==weekControl)).length != 0)
+          ? 
+            <div className='container-button-delete-revision'><button className='bt-add-default' onClick={hanlderDeleteRevision}>ELIMINAR</button></div>
+          :''
+        }
         <TableContainer component={Paper} sx={{ minWidth: 150, align:"center"}} >
           <Table sx={{ }} aria-label="simple table" align="center">
               <TableHead>
@@ -124,11 +234,12 @@ const Revision =() => {
                   <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Ordenador</TableCell>
                   <TableCell width="100px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Cantidad</TableCell>
                   <TableCell  width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Operativo</TableCell>
+                  <TableCell width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Comentarios</TableCell>
               </TableRow>
               </TableHead>
 
               <TableBody>
-              {revision.length == 0 ?  <TableCell align="center">Cargando..</TableCell>
+              {revision.length == 0 ?  <TableCell align="center"></TableCell>
               :    
               (rowsPerPage > 0
                   ? revision
@@ -153,7 +264,7 @@ const Revision =() => {
                     (classroomControl !== '')? 
                     (dataRow.dataInventory !== null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null)
                     :dataRow)
-                    .filter((y) => weekControl == ''? y : (moment(y.createdAt).week ==weekControl) )
+                    .filter((y) => weekControl == ''? y : (moment(y.createdAt).week() ==weekControl) )
                   )     
                   .map((row, index) => {
                         return(
@@ -165,8 +276,9 @@ const Revision =() => {
                             <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.tb_tool.Name: ""}</TableCell>
                             <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.tb_tool.Type: ""}</TableCell>
                             <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.dataInventory? row.dataInventory.computer.Name: ""}</TableCell>
-                            <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>1</TableCell>
-                            <TableCell align="center"><Switch checked={row.Works} /></TableCell>                                
+                            <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Actual_amount}</TableCell>
+                            <TableCell align="center"><Switch checked={row.Works}/></TableCell>
+                            <TableCell  style={{fontFamily:'Open Sans', fontSize:'14px', width: 100}}>{row.Comments}</TableCell>                                
                           </TableRow>
                         )
                       }
@@ -177,7 +289,8 @@ const Revision =() => {
                   <TableRow >  
                   <TablePagination
                   rowsPerPageOptions={[5, 10]}
-                  count={revision
+                  count={
+                    revision
                     .filter((dataRow)=> 
                       floorControl == '' && floorControl !== 0 ?
                         dataRow
@@ -186,7 +299,9 @@ const Revision =() => {
                     .filter((dataRow) =>
                     (classroomControl !== '')? 
                     (dataRow.dataInventory !== null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null)
-                    :dataRow ).length}
+                    :dataRow ).filter((y) => weekControl == ''? '' : (moment(y.createdAt).week() == weekControl)).length                    
+                  
+                  }
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}
@@ -202,6 +317,17 @@ const Revision =() => {
       </div>
     </div>
     {openModalCreateRevision && <ModalAddRevision openModal={setOpenModalCreateRevision}/>}
+    <Snackbar open={openOkResponse} autoHideDuration={1000} onClose={handleClose}>
+            <AlertResponse onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Se eliminó correctamente!!
+            </AlertResponse>
+    </Snackbar>
+    
+    <Snackbar open={openErrorResponse} autoHideDuration={1000} onClose={handleClose}>
+            <AlertResponse onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                Error al eliminar la revisión, intenetelo mas tarde 
+            </AlertResponse>
+        </Snackbar>
     </>
     
   )

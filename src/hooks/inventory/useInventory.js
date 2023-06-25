@@ -51,26 +51,21 @@ export const useInventory = (classroom)=>{
         });
         return result;
     }
-    const createInventory = async(classroom, computer, tools)=>{
-       const  result = await Promise.all(tools.map(async(element)=>{
-        try {
-          const response = await axios.post(url_api+`/api/inventory`, {Classroom_id: classroom, Computer_id:computer, Tool_id:element},{
-            headers: {
-              'x-access-token': localStorage.getItem('token'),
-              'Content-Type': 'application/json'
-            }
-          })
-          return response.data.status;
-        }catch (error) {
-          return error;
-        }
-      }))
-      console.log(result);
-      return result;
+    const createInventory = async(classroom, computer, Tool_id, amount)=>{
+       
+        const response = await axios.post(url_api+`/api/inventory`, {Classroom_id: classroom, Computer_id:computer, Tool_id:Tool_id, Amount:amount},{
+          headers: {
+            'x-access-token': localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => response.data.status)
+        .catch(error => error);
+        return response;
     }
-    const updateInventory = async(inventory_id, Classroom_id, Computer_id, Tool_id)=>{
+    const updateInventory = async(inventory_id, Classroom_id, Computer_id, Tool_id, amount)=>{
       
-        const result = await axios.put(url_api+`/api/inventory/${inventory_id}`, {Classroom_id: Classroom_id, Computer_id:Computer_id, Tool_id:Tool_id},{
+        const result = await axios.put(url_api+`/api/inventory/${inventory_id}`, {Classroom_id: Classroom_id, Computer_id:Computer_id, Tool_id:Tool_id, Amount:amount},{
           headers: {
             'x-access-token': localStorage.getItem('token'),
             'Content-Type': 'application/json'

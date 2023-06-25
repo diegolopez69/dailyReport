@@ -67,13 +67,15 @@ const ModalAddRevision =({openModal})=> {
 
     useEffect(() => {
         if (inventory.length > 0 && !arraysAreEqual(inventory, previousInventoryRef.current)) {
+            console.log(inventory)
         const revisedData = inventory.map((element) => ({
             Comments: "",
             there_is: 0,
             Works: 0,
-            Actual_amount: null,
+            Theoretical_amount: parseInt(element.Amount),
+            Actual_amount: element.tb_tool.Type =='Software'? 1:0,
             Inventory_id: element.Inventory_id,
-            Classroom_id:element.Classroom_id,
+            Classroom_id: parseInt(element.Classroom_id),
             Computer_name: element.computer.Name,
             Tool_name: element.tb_tool.Name,
             Tool_type: element.tb_tool.Type
@@ -157,7 +159,8 @@ const ModalAddRevision =({openModal})=> {
                 setWarningSaveRevision(-1)
               }, 3000);
         }else{
-            const result = await createRevision(dataRevision);
+            console.log(dataRevision.filter((dataRow)=> dataRow.Classroom_id == (classroomControl != '' || classroomControl == 0? classroomControl: null)))
+            const result = await createRevision(dataRevision.filter((dataRow)=> dataRow.Classroom_id == (classroomControl != '' || classroomControl == 0? classroomControl: null)));
             if(result[result.length-1] == 201){
                 setOkResponse(true)
                 setTimeout(() => {
@@ -170,8 +173,6 @@ const ModalAddRevision =({openModal})=> {
                 }, 3000);
             }
         }
-
-        
         // openModal(false)x
     }
     const handleClearControl = ()=>{
@@ -190,7 +191,7 @@ const ModalAddRevision =({openModal})=> {
         <div className="modalBackground-revision-especific">
             <div className="modalContainer-inventory-especific">
                 <div className='tittle-header-modal-revision'>
-                    <h5>Reporte</h5>
+                    <h5>Revisión</h5>
                     <br></br>
                 </div>
                 <div className='container-header-bt-add'>
@@ -260,7 +261,8 @@ const ModalAddRevision =({openModal})=> {
                             <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Tipo</TableCell>
                             <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Ordenador</TableCell>
                             <TableCell width="100px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Cantidad</TableCell>
-                            <TableCell  width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Operativo</TableCell>
+                            <TableCell  align='center' width="100px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Operativo</TableCell>
+                            <TableCell align='center' width="100px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Comentarios</TableCell>
                         </TableRow>
                         </TableHead>
 
@@ -286,8 +288,9 @@ const ModalAddRevision =({openModal})=> {
                                 <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Tool_name}</TableCell>
                                 <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Tool_type}</TableCell>
                                 <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Computer_name}</TableCell>
-                                <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>1</TableCell>
-                                <TableCell align="center"><Switch checked={row.Works} onChange={(event)=>handleCheckboxClick(event, row.Inventory_id)} /></TableCell>                                
+                                <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}><input type="number" defaultValue={row.Tool_type == 'Software'? 1: ''} disabled={row.Tool_type == 'Software'? true:false}  className='input-create-revision' onChange={(event)=>handleCurrentAmountClick(event, row.Inventory_id)}/></TableCell>
+                                <TableCell align='center' ><Switch checked={row.Works}  disabled={row.there_is? false: true}  onChange={(event)=>handleCheckboxClick(event, row.Inventory_id)} /></TableCell>                                
+                                <TableCell align='center' style={{fontFamily:'Open Sans', fontSize:'14px'}}><input type="text" placeholder='Descripción'  className='input-create-comments-revision' onChange={(event)=>handleCommentsClick(event, row.Inventory_id)}/></TableCell>
                                 </TableRow>
                             )
                             }

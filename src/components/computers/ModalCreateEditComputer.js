@@ -59,8 +59,8 @@ const ModalCreateEditComputer =({openModal, computer, responseOk, responseError}
                                     id="outlined-required"
                                     type='text'
                                     label="Serie"
-                                    defaultValue='Serie'
-                                    // onChange={(event)=>setCurrentItem({...currentItem, Name:event.target.value})}
+                                    defaultValue={currentComputer.Serie}
+                                    onChange={(event)=>setCurrentComputer({...currentComputer, Serie:event.target.value})}
                             />                        
                         </FormControl>
                     </Box>
