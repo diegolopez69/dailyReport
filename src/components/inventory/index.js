@@ -151,7 +151,7 @@ const InventoryGeneral = () => {
                       .map((row, index) => {
                       return(
                       <TableRow key={index} style={{height:'20px'}}>  
-                          <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{index}</TableCell>
+                          <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{index+1}</TableCell>
                           <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.computer.Name}</TableCell>
                           <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.tb_tool.Name}</TableCell>
                           <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.tb_tool.Type}</TableCell>

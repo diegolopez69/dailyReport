@@ -232,7 +232,7 @@ const Revision =() => {
                   <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Ítem</TableCell>
                   <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Tipo</TableCell>
                   <TableCell width="70px" style={{fontFamily:'Open Sans', fontSize:'16px'}}> Ordenador</TableCell>
-                  <TableCell width="100px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Cantidad</TableCell>
+                  <TableCell width="100px" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Cantidad visual</TableCell>
                   <TableCell  width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Operativo</TableCell>
                   <TableCell width="100px" align="center" style={{fontFamily:'Open Sans', fontSize:'16px'}}>Comentarios</TableCell>
               </TableRow>

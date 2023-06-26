@@ -166,6 +166,8 @@ const ModalAddRevision =({openModal})=> {
                 setTimeout(() => {
                     setOkResponse(false)
                 }, 3000);
+                setTimeout(() => { openModal(false)
+                }, 800);
             }else{
                 setErrorResponse(true)
                 setTimeout(() => {
