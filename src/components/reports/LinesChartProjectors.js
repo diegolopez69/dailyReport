@@ -59,7 +59,7 @@ const LinesChartProjectors = ()=> {
         fetchData();
     }, [dataMouses])
 
-    var beneficios = dataMouses != ''? dataMouses.Theoretical_quantity_projectors.map((element)=> element.quantity_projectors) : [0, 0,0,0,0,0,0,0,0,0,0,0]
+    var beneficios = dataMouses != ''? dataMouses.Actual_quantity_projectors.map((element)=> element.total_projectors) : [0, 0,0,0,0,0,0,0,0,0,0,0]
 
     var midata = {
         labels: meses,

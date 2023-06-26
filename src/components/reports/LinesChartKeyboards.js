@@ -59,7 +59,7 @@ const LinesChartKeyboards = ()=> {
         fetchData();
     }, [dataMouses])
 
-    var beneficios = dataMouses != ''? dataMouses.theoretical_quantity_keyboards.map((element)=> element.quantity_keyboards) : [0, 0,0,0,0,0,0,0,0,0,0,0]
+    var beneficios = dataMouses != ''? dataMouses.actual_number_of_keyboards.map((element)=> element.total_keyboards) : [0, 0,0,0,0,0,0,0,0,0,0,0]
 
     var midata = {
         labels: meses,

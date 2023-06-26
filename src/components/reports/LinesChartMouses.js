@@ -59,7 +59,7 @@ const LinesChartMouses = ()=> {
         fetchData();
     }, [dataMouses])
 
-    var beneficios = dataMouses != ''? dataMouses.theoretical_quantity_mouses.map((element)=> element.quantity_mouses) : [0, 0,0,0,0,0,0,0,0,0,0,0]
+    var beneficios = dataMouses != ''? dataMouses.actual_number_of_mouses.map((element)=> element.total_mouses) : [0,0,0,0,0,0,0,0,0,0,0,0]
 
     var midata = {
         labels: meses,
@@ -77,7 +77,7 @@ const LinesChartMouses = ()=> {
             },
             // {
             //     label: 'Cantidad Actual',
-            //     data: dataMouses != ''? dataMouses.actual_number_of_mouses.map((element)=> element.total_mouses) : [0, 0,0,0,0,0,0,0,0,0,0,0]
+            //     data: dataMouses != ''? dataMouses.actual_number_of_mouses.map((element)=> element.total_mouses) : [0,0,0,0,0,0,0,0,0,0,0,0]
             // },
         ],
     };
