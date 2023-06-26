@@ -38,7 +38,7 @@ const Pies = ()=> {
         datasets: [
             {
             label: 'Nº de aulas',
-                data: dataClassroomsChecked !== ''? [classrooms.length -dataClassroomsChecked[0], dataClassroomsChecked[0]]: [0, 0],
+                data: dataClassroomsChecked !== ''? [ dataClassroomsChecked[0],classrooms.length -dataClassroomsChecked[0]]: [0, 0],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
