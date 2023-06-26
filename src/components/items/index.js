@@ -106,7 +106,7 @@ const Items = props => {
     return (
         <>
       <div className='div-container-title-addbt'>
-        <h5 className='tittle-page'>Inventario</h5>
+        <h5 className='tittle-page'>Ítems</h5>
         <button className='bt-add-default' onClick={createItem}><AddIcon className='icon-add-default'/> NUEVA</button>
       </div>
       <div className='body-inventory'>

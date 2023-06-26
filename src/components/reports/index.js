@@ -17,22 +17,22 @@ const Reports = props => {
                 <div className='container-body-reports'>
                     <div className='row1-grafics'>
                         <div className='container-pies-grafict'>
-                            <h5 className='title-pies-grafict' style={{ marginBottom:20}}><b>Grafico aulas revisadas y no revisadas</b></h5>
+                            <h5 className='title-pies-grafict' style={{ marginBottom:20}}><b>Gráfico aulas revisadas y no revisadas</b></h5>
                             <PiesChart/>
                         </div>
                         <div className='container-pies-grafict'>
-                            <h5 className='title-pies-grafict' style={{ marginBottom:20}}><b>Grafico Teclados</b></h5>
+                            <h5 className='title-pies-grafict' style={{ marginBottom:20}}><b>Gráfico Teclados</b></h5>
                             <LinesChartKeyboards/>
                         </div>
                     </div>
                     <div className='row1-grafics'>
                         <div className='container-pies-grafict'>
-                            <h5 className='title-pies-grafict' style={{ marginBottom:20}}><b>Grafico Ratones</b></h5>
+                            <h5 className='title-pies-grafict' style={{ marginBottom:20}}><b>Gráfico Ratones</b></h5>
                             
                             <LinesChartMouses/>
                         </div>
                         <div className='container-pies-grafict'>
-                            <h5 className='title-pies-grafict' style={{ marginBottom:20}}><b>Grafico Proyectores</b></h5>
+                            <h5 className='title-pies-grafict' style={{ marginBottom:20}}><b>Gráfico Proyectores</b></h5>
                             <LinesChartProjectors/>
                         </div>
                     </div>

@@ -65,7 +65,7 @@ const LinesChartKeyboards = ()=> {
         labels: meses,
         datasets: [ // Cada una de las líneas del gráfico
             {
-                label: 'Cantidad Teorica',
+                label: 'Cantidad Teórica',
                 data: beneficios,
                 tension: 0.5,
                 fill : true,

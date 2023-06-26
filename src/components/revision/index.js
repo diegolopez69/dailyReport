@@ -299,7 +299,7 @@ const Revision =() => {
                     .filter((dataRow) =>
                     (classroomControl !== '')? 
                     (dataRow.dataInventory !== null ? dataRow.dataInventory.tb_classroom.Classroom_id == classroomControl: null)
-                    :dataRow ).filter((y) => weekControl == ''? '' : (moment(y.createdAt).week() == weekControl)).length                    
+                    :dataRow ).filter((y) => weekControl == ''? y : (moment(y.createdAt).week() == weekControl)).length                    
                   
                   }
                   rowsPerPage={rowsPerPage}
