@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { useState, useEffect } from "react"
 import axios from 'axios';
+import { useClassrooms } from '../../hooks/classrooms/useClassrooms';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 var options = {
@@ -15,6 +16,7 @@ var options = {
 const Pies = ()=> {
     const [dataClassroomsChecked, setDataClassroomsChecked] = useState('');
     const url_api = process.env.REACT_APP_BASE_API;
+    const {classrooms} = useClassrooms();
     useEffect(()=>{
         const fetchData = async()=>{
             await axios.get(url_api+'/api/report/classroomsChecked',{
@@ -36,7 +38,7 @@ const Pies = ()=> {
         datasets: [
             {
             label: 'Nº de aulas',
-                data: dataClassroomsChecked !== ''? dataClassroomsChecked: [0, 0],
+                data: dataClassroomsChecked !== ''? [classrooms.length -dataClassroomsChecked[0], dataClassroomsChecked[0]]: [0, 0],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 206, 86, 0.2)',

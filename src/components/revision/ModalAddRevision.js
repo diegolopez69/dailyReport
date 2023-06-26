@@ -288,7 +288,7 @@ const ModalAddRevision =({openModal})=> {
                                 <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Tool_name}</TableCell>
                                 <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Tool_type}</TableCell>
                                 <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}>{row.Computer_name}</TableCell>
-                                <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}><input type="number" defaultValue={row.Tool_type == 'Software'? 1: ''} disabled={row.Tool_type == 'Software'? true:false}  className='input-create-revision' onChange={(event)=>handleCurrentAmountClick(event, row.Inventory_id)}/></TableCell>
+                                <TableCell style={{fontFamily:'Open Sans', fontSize:'14px'}}><input type="number" defaultValue={row.Tool_type == 'Software'? 1: ''} value={row.Actual_amount == 0? '': row.Actual_amount} disabled={row.Tool_type == 'Software'? true:false}  className='input-create-revision' onChange={(event)=>handleCurrentAmountClick(event, row.Inventory_id)}/></TableCell>
                                 <TableCell align='center' ><Switch checked={row.Works}  disabled={row.there_is? false: true}  onChange={(event)=>handleCheckboxClick(event, row.Inventory_id)} /></TableCell>                                
                                 <TableCell align='center' style={{fontFamily:'Open Sans', fontSize:'14px'}}><input type="text" placeholder='Descripción'  className='input-create-comments-revision' onChange={(event)=>handleCommentsClick(event, row.Inventory_id)}/></TableCell>
                                 </TableRow>

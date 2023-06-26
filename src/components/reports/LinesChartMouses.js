@@ -65,7 +65,7 @@ const LinesChartMouses = ()=> {
         labels: meses,
         datasets: [ // Cada una de las líneas del gráfico
             {
-                label: 'Cantidad Teórica',
+                label: 'Cantidad Total',
                 data: beneficios,
                 tension: 0.5,
                 fill : true,
@@ -75,10 +75,10 @@ const LinesChartMouses = ()=> {
                 pointBorderColor: 'rgba(255, 99, 132)',
                 pointBackgroundColor: 'rgba(255, 99, 132)',
             },
-            {
-                label: 'Cantidad Actual',
-                data: dataMouses != ''? dataMouses.actual_number_of_mouses.map((element)=> element.total_mouses) : [0, 0,0,0,0,0,0,0,0,0,0,0]
-            },
+            // {
+            //     label: 'Cantidad Actual',
+            //     data: dataMouses != ''? dataMouses.actual_number_of_mouses.map((element)=> element.total_mouses) : [0, 0,0,0,0,0,0,0,0,0,0,0]
+            // },
         ],
     };
     

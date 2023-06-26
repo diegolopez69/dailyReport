@@ -65,7 +65,7 @@ const LinesChartProjectors = ()=> {
         labels: meses,
         datasets: [ // Cada una de las líneas del gráfico
             {
-                label: 'Cantidad Teórica',
+                label: 'Cantidad Total',
                 data: beneficios,
                 tension: 0.5,
                 fill : true,
@@ -75,10 +75,10 @@ const LinesChartProjectors = ()=> {
                 pointBorderColor: 'rgba(255, 99, 132)',
                 pointBackgroundColor: 'rgba(255, 99, 132)',
             },
-            {
-                label: 'Cantidad Actual',
-                data: dataMouses != ''? dataMouses.Actual_quantity_projectors.map((element)=> element.total_projectors) : [0, 0,0,0,0,0,0,0,0,0,0,0]
-            },
+            // {
+            //     label: 'Cantidad Actual',
+            //     data: dataMouses != ''? dataMouses.Actual_quantity_projectors.map((element)=> element.total_projectors) : [0, 0,0,0,0,0,0,0,0,0,0,0]
+            // },
         ],
     };
     
